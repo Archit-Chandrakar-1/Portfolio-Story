@@ -1,0 +1,350 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #F7F6F2;
+  --surface: #FFFFFF;
+  --border: #E8E6DF;
+  --navy: #12122A;
+  --lime: #D4E84A;
+  --mint: #B8D8E8;
+}
+
+/* Dark mode overrides */
+.dark {
+  --bg: #0F0F1E;
+  --surface: #1A1A2E;
+  --border: #2A2A45;
+  --navy: #F7F6F2;
+  --lime: #D4E84A;
+  --mint: #4A7A9B;
+}
+
+.dark body {
+  background-color: var(--bg);
+  color: var(--navy);
+}
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--navy);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--border);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--lime);
+  border-radius: 3px;
+}
+
+/* Light Card */
+.light-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 20px rgba(18, 18, 42, 0.06), 0 1px 4px rgba(18, 18, 42, 0.04);
+}
+
+/* Legacy alias — used in old components */
+.glass {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 24px rgba(18, 18, 42, 0.08);
+}
+
+/* Gradient Text — lime to navy */
+.gradient-text {
+  background: linear-gradient(135deg, #BACE35 0%, #12122A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-lime {
+  background: linear-gradient(135deg, #D4E84A 0%, #9DC420 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Blob shapes */
+.blob {
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation: blob 10s infinite;
+  filter: blur(40px);
+}
+
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+
+  33% {
+    transform: translate(30px, -20px) scale(1.08);
+  }
+
+  66% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+/* Animated background gradient */
+.animated-gradient-bg {
+  background: linear-gradient(-45deg, #F7F6F2, #EFF5D4, #E8F4F8, #F7F6F2);
+  background-size: 400% 400%;
+  animation: gradientShift 12s ease infinite;
+}
+
+@keyframes gradientShift {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Shimmer effect */
+.shimmer {
+  background: linear-gradient(90deg,
+      rgba(18, 18, 42, 0) 0%,
+      rgba(18, 18, 42, 0.04) 50%,
+      rgba(18, 18, 42, 0) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2.5s linear infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Float animation */
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-16px);
+  }
+}
+
+/* Card hover */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-6px);
+  border-color: rgba(212, 232, 74, 0.5) !important;
+  box-shadow: 0 20px 60px rgba(18, 18, 42, 0.12), 0 0 0 1px rgba(212, 232, 74, 0.3);
+}
+
+/* Grid dot pattern */
+.dot-pattern {
+  background-image: radial-gradient(rgba(18, 18, 42, 0.07) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Gradient border */
+.gradient-border {
+  position: relative;
+  background: var(--surface);
+  border-radius: 16px;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 17px;
+  background: linear-gradient(135deg, rgba(212, 232, 74, 0.6), rgba(184, 216, 232, 0.6));
+  z-index: -1;
+}
+
+/* Timeline connector */
+.timeline-line {
+  background: linear-gradient(180deg, transparent, #D4E84A, #B8D8E8, transparent);
+}
+
+/* Button styles */
+.btn-primary {
+  background: var(--navy);
+  color: #F7F6F2;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(212, 232, 74, 0.15), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.btn-primary:hover::after {
+  opacity: 1;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 8px 30px rgba(18, 18, 42, 0.25);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1.5px solid rgba(18, 18, 42, 0.2);
+  color: var(--navy);
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-secondary:hover {
+  background: rgba(18, 18, 42, 0.05);
+  border-color: rgba(18, 18, 42, 0.4);
+  box-shadow: 0 4px 16px rgba(18, 18, 42, 0.1);
+}
+
+/* Admin form styles — always dark */
+.admin-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  color: #111827;
+  font-family: 'Inter', sans-serif;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.admin-input:focus {
+  outline: none;
+  border-color: rgba(212, 232, 74, 0.6);
+  box-shadow: 0 0 0 3px rgba(212, 232, 74, 0.1);
+}
+
+.admin-input::placeholder {
+  color: #64748B;
+}
+
+/* Admin Save button — always green */
+.btn-admin-save {
+  background: #16a34a;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-admin-save:hover {
+  background: #15803d;
+  box-shadow: 0 4px 16px rgba(22, 163, 74, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-admin-save:active {
+  transform: translateY(0);
+}
+
+.btn-admin-save:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Admin Delete button — always red */
+.btn-admin-delete {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 12px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-admin-delete:hover {
+  background: rgba(239, 68, 68, 0.28);
+  border-color: rgba(239, 68, 68, 0.5);
+  box-shadow: 0 4px 16px rgba(239, 68, 68, 0.2);
+  transform: translateY(-1px);
+}
+
+.btn-admin-delete:active {
+  transform: translateY(0);
+}

@@ -1,0 +1,27 @@
+  ▲ Next.js 14.2.5
+  - Local:        http://localhost:3002
+  - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 1338ms
+ ○ Compiling / ...
+ ✓ Compiled / in 1817ms (1590 modules)
+Experiences Error: [FirebaseError: Expected first argument to collection() to be a CollectionReference, a DocumentReference or FirebaseFirestore] {
+  code: 'invalid-argument',
+  customData: undefined,
+  toString: [Function (anonymous)]
+}
+Products Error: [FirebaseError: Expected first argument to collection() to be a CollectionReference, a DocumentReference or FirebaseFirestore] {
+  code: 'invalid-argument',
+  customData: undefined,
+  toString: [Function (anonymous)]
+}
+Server Render: Experiences=0, Products=0
+Certs Error: [FirebaseError: Expected first argument to collection() to be a CollectionReference, a DocumentReference or FirebaseFirestore] {
+  code: 'invalid-argument',
+  customData: undefined,
+  toString: [Function (anonymous)]
+}
+ GET / 200 in 2232ms
+ ✓ Compiled in 369ms (664 modules)
+[?25h
