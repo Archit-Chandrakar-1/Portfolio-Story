@@ -102,14 +102,9 @@ export const getServices = () =>
 // ─── Generic Helpers ──────────────────────────────────────────────────────────
 
 export async function getDocument<T>(path: string): Promise<T | null> {
-    try {
-        const ref = doc(db, path);
-        const snap = await getDoc(ref);
-        return snap.exists() ? (snap.data() as T) : null;
-    } catch (error) {
-        console.warn(`[Firestore] getDocument failed for path ${path}:`, error);
-        return null;
-    }
+    const ref = doc(db, path);
+    const snap = await getDoc(ref);
+    return snap.exists() ? (snap.data() as T) : null;
 }
 
 export async function setDocument<T extends DocumentData>(path: string, data: T): Promise<void> {
@@ -121,15 +116,10 @@ export async function getCollectionDocs<T extends { id?: string }>(
     collectionPath: string,
     ...constraints: QueryConstraint[]
 ): Promise<T[]> {
-    try {
-        const ref = collection(db, collectionPath);
-        const q = constraints.length ? query(ref, ...constraints) : query(ref);
-        const snap = await getDocs(q);
-        return snap.docs.map((d) => ({ id: d.id, ...d.data() } as T));
-    } catch (error) {
-        console.warn(`[Firestore] getCollectionDocs failed for path ${collectionPath}:`, error);
-        return [];
-    }
+    const ref = collection(db, collectionPath);
+    const q = constraints.length ? query(ref, ...constraints) : query(ref);
+    const snap = await getDocs(q);
+    return snap.docs.map((d) => ({ id: d.id, ...d.data() } as T));
 }
 
 export async function addDocument<T extends DocumentData>(
