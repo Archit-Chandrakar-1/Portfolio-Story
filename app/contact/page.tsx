@@ -68,7 +68,7 @@ export default function ContactPage() {
                                     <div>
                                         <p className="text-text-muted text-xs mb-0.5">Email</p>
                                         <p className="text-text-primary text-sm font-medium group-hover:text-violet-light transition-colors">
-                                            archit@example.com
+                                            archit1chandrakar@gmail.com
                                         </p>
                                     </div>
                                 </a>
