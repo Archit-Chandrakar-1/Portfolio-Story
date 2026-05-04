@@ -163,10 +163,10 @@ export default function Hero({ about }: HeroProps) {
                         transition={{ delay: 1, duration: 0.8, ease: 'easeOut' }}
                         className="hidden lg:block absolute top-1/2 right-12 -translate-y-1/2"
                     >
-                        <div className="bg-white rounded-3xl p-6 space-y-5 min-w-[200px] float shadow-card-hover border border-border">
+                        {/* <div className="bg-white rounded-3xl p-6 space-y-5 min-w-[200px] float shadow-card-hover border border-border">
                             {[
                                 { label: 'Products Shipped', value: '10+' },
-                                { label: 'Years Experience', value: '5+' },
+                                { label: 'Years Experience', value: '2' },
                                 { label: 'Users Impacted', value: '1M+' },
                             ].map(({ label, value }) => (
                                 <div key={label} className="text-center">
@@ -176,7 +176,7 @@ export default function Hero({ about }: HeroProps) {
                             ))}
                             Lime accent bar
                             <div className="h-1.5 w-full bg-lime rounded-full" />
-                        </div>
+                        </div> */}
                     </motion.div>
                 </div>
             </motion.div>

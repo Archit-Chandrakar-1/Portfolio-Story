@@ -35,10 +35,13 @@ export default async function HomePage() {
         <>
             <Hero about={aboutData} />
             <LandingAbout />
-            <StorySection />
             <Experience experiences={experiencesData} />
             <FeaturedProducts products={displayProducts} />
             <FeaturedCertifications certs={displayCerts} />
+            <StorySection />
+            {/* <Experience experiences={experiencesData} />
+            <FeaturedProducts products={displayProducts} />
+            <FeaturedCertifications certs={displayCerts} /> */}
         </>
     );
 }
