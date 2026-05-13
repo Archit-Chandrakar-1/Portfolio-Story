@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { RiUserLine, RiBriefcaseLine, RiApps2Line, RiAwardLine, RiArticleLine, RiLinksLine, RiExternalLinkLine } from 'react-icons/ri';
+import { RiUserLine, RiBriefcaseLine, RiApps2Line, RiAwardLine, RiArticleLine, RiLinksLine, RiExternalLinkLine, RiFlowChart } from 'react-icons/ri';
 import { useAuth } from '@/lib/AuthContext';
 
 const SECTIONS = [
@@ -11,6 +11,7 @@ const SECTIONS = [
     { href: '/admin/products', icon: RiApps2Line, label: 'Products', desc: 'Add, edit, or remove portfolio products', color: 'violet' },
     { href: '/admin/certifications', icon: RiAwardLine, label: 'Certifications', desc: 'Manage your credentials and badges', color: 'cyan' },
     { href: '/admin/blogs', icon: RiArticleLine, label: 'Blog Posts', desc: 'Write and publish product insights', color: 'violet' },
+    { href: '/admin/workflows', icon: RiFlowChart, label: 'Workflows', desc: 'Manage automated workflows and pipelines', color: 'violet' },
     { href: '/admin/socials', icon: RiLinksLine, label: 'Socials & Links', desc: 'Update social media accounts and links', color: 'cyan' },
 ];
 

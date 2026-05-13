@@ -11,9 +11,11 @@ const navLinks = [
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
     { href: '/products', label: 'Products' },
+    { href: '/clients', label: 'Clients' },
     { href: '/certifications', label: 'Certifications' },
     { href: '/blogs', label: 'Blogs' },
     { href: '/contact', label: 'Contact' },
+
 ];
 
 function RocketAnimation() {

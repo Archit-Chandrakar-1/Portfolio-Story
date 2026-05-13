@@ -23,6 +23,12 @@ export default async function ProductPage({ params }: { params: { id: string } }
         notFound();
     }
 
+
+    if (product.caseStudy) {
+        const { default: CaseStudyPage } = await import('@/components/sections/CaseStudyPage');
+        return <CaseStudyPage product={product} />;
+    }
+
     return (
         <div className="min-h-screen pt-32 pb-20">
             <div className="max-w-4xl mx-auto px-6">
@@ -45,7 +51,7 @@ export default async function ProductPage({ params }: { params: { id: string } }
                         <div className="p-8 sm:p-10">
                             <h1 className="font-display font-black text-3xl sm:text-5xl text-text-primary mb-3">{product.name}</h1>
                             <p className="text-text-secondary text-lg sm:text-xl mb-6">{product.description}</p>
-                            
+
                             <div className="flex flex-wrap gap-2 mb-10">
                                 {product.tags?.map((t) => (
                                     <span key={t} className="text-sm px-3 py-1 rounded-lg bg-cyan/10 text-cyan-light border border-cyan/15">{t}</span>
@@ -60,13 +66,13 @@ export default async function ProductPage({ params }: { params: { id: string } }
                             <div className="flex flex-wrap gap-4 border-t border-white/5 pt-8">
                                 {product.link && product.link !== '#' && (
                                     <a href={product.link} target="_blank" rel="noopener noreferrer"
-                                       className="btn-primary px-6 py-3 text-sm rounded-xl flex items-center gap-2">
+                                        className="btn-primary px-6 py-3 text-sm rounded-xl flex items-center gap-2">
                                         <RiExternalLinkLine size={16} /> View Project
                                     </a>
                                 )}
                                 {product.prdUrl && (
                                     <a href={product.prdUrl} target="_blank" rel="noopener noreferrer"
-                                       className="btn-secondary px-6 py-3 text-sm rounded-xl flex items-center gap-2 border border-white/10 hover:bg-white/5 transition-colors">
+                                        className="btn-secondary px-6 py-3 text-sm rounded-xl flex items-center gap-2 border border-white/10 hover:bg-white/5 transition-colors">
                                         <RiFileList3Line size={16} /> View PRD
                                     </a>
                                 )}

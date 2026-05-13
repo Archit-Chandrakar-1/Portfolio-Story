@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import {
     RiDashboardLine, RiUserLine, RiBriefcaseLine, RiApps2Line,
-    RiAwardLine, RiArticleLine, RiLinksLine, RiLogoutBoxLine, RiMenuLine, RiCloseLine
+    RiAwardLine, RiArticleLine, RiLinksLine, RiLogoutBoxLine, RiMenuLine, RiCloseLine, RiFlowChart
 } from 'react-icons/ri';
 
 const NAV = [
@@ -16,8 +16,10 @@ const NAV = [
     { href: '/admin/products', label: 'Products', icon: RiApps2Line },
     { href: '/admin/certifications', label: 'Certifications', icon: RiAwardLine },
     { href: '/admin/blogs', label: 'Blog Posts', icon: RiArticleLine },
+    { href: '/admin/workflows', label: 'Workflows', icon: RiFlowChart },
     { href: '/admin/socials', label: 'Socials & Links', icon: RiLinksLine },
-];
+    { href: '/admin/clients', label: 'Clients', icon: RiBriefcaseLine },
+]
 
 export default function AdminSidebar() {
     const pathname = usePathname();
@@ -51,8 +53,8 @@ export default function AdminSidebar() {
                             href={href}
                             onClick={() => setMobileOpen(false)}
                             className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${active
-                                    ? 'bg-violet/15 text-violet-light border border-violet/20'
-                                    : 'text-text-secondary hover:text-text-primary hover:bg-white/5'
+                                ? 'bg-violet/15 text-violet-light border border-violet/20'
+                                : 'text-text-secondary hover:text-text-primary hover:bg-white/5'
                                 }`}
                         >
                             <Icon size={16} />

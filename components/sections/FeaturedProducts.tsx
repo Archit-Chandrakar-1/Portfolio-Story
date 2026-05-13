@@ -78,7 +78,15 @@ export default function FeaturedProducts({ products }: { products: Product[] }) 
                                             </span>
                                         ))}
                                     </div>
-                                    {product.link && product.link !== '#' && (
+
+                                    {product.slug ? (
+                                        <Link
+                                            href={`/products/${product.slug}`}
+                                            className="mt-4 flex items-center gap-1.5 text-xs text-navy font-semibold hover:text-lime-dark transition-colors"
+                                        >
+                                            View Case Study <RiArrowRightLine size={11} />
+                                        </Link>
+                                    ) : product.link && product.link !== '#' ? (
                                         <a
                                             href={product.link}
                                             target="_blank"
@@ -87,13 +95,16 @@ export default function FeaturedProducts({ products }: { products: Product[] }) 
                                         >
                                             View Case Study <RiExternalLinkLine size={11} />
                                         </a>
-                                    )}
-                                </div>
+                                    ) : null}
+
+
+
                             </div>
+                        </div>
                         </ScrollReveal>
                     ))}
-                </div>
             </div>
-        </section>
+        </div>
+        </section >
     );
 }

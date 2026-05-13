@@ -48,6 +48,30 @@ export interface ExperienceEntry {
     order: number;
 }
 
+// ─── Case Study Types ─────────────────────────────────────────────────────────
+
+export interface CaseStudySection {
+    heading: string;
+    body: string;
+    imageUrl?: string;
+}
+
+export interface CaseStudyMetric {
+    label: string;
+    before: string;
+    after: string;
+}
+
+export interface CaseStudy {
+    problem: CaseStudySection;
+    research: CaseStudySection;
+    solution: CaseStudySection;
+    learnings: CaseStudySection;
+    metrics: CaseStudyMetric[];
+}
+
+// ─── Product ──────────────────────────────────────────────────────────────────
+
 export interface Product {
     id?: string;
     name: string;
@@ -55,11 +79,15 @@ export interface Product {
     longDescription: string;
     tags: string[];
     link: string;
+    slug?: string;
     prdUrl?: string;
     imageUrl: string;
     featured: boolean;
     order: number;
+    caseStudy?: CaseStudy;
 }
+
+// ─── Other Types ──────────────────────────────────────────────────────────────
 
 export interface Certification {
     id?: string;
@@ -85,6 +113,7 @@ export interface BlogPost {
     createdAt: string;
     updatedAt: string;
 }
+
 export interface Service {
     id?: string;
     title: string;
@@ -93,11 +122,49 @@ export interface Service {
     isActive: boolean;
 }
 
-export const getServices = () =>
-    getCollectionDocs<Service>(
-        'services',
+export type WorkflowTag = 'AI' | 'Automation' | 'Analytics' | 'Research' | 'GTM';
+
+export interface WorkflowNode {
+    icon: string;
+    label: string;
+    tool: string;
+}
+
+export interface Workflow {
+    id?: string;
+    title: string;
+    description: string;
+    problem: string;
+    outcome: string;
+    tags: WorkflowTag[];
+    imageUrl?: string;
+    tool: string;
+    impact: string;
+    nodes: WorkflowNode[];
+    liveLink?: string;
+    githubLink?: string;
+    notionLink?: string;
+    order?: number;
+}
+
+export interface Client {
+    id?: string;
+    name: string;
+    description: string;
+    website: string;       // full URL e.g. https://myclient.com
+    logoUrl?: string;      // Firebase Storage URL
+    tags: string[];        // e.g. ["SaaS", "Fintech"]
+    order: number;
+    published: boolean;
+}
+
+export const getClients = () =>
+    getCollectionDocs<Client>(
+        'clients',
+        where('published', '==', true),
         orderBy('order', 'asc')
     );
+
 
 // ─── Generic Helpers ──────────────────────────────────────────────────────────
 
@@ -158,6 +225,11 @@ export const getExperiences = () =>
 export const getProjects = () =>
     getCollectionDocs<Product>('projects', orderBy('order', 'asc'));
 
+export const getProductBySlug = async (slug: string): Promise<Product | null> => {
+    const all = await getCollectionDocs<Product>('projects', where('slug', '==', slug));
+    return all[0] ?? null;
+};
+
 export const getCertifications = () =>
     getCollectionDocs<Certification>('certifications', orderBy('order', 'asc'));
 
@@ -170,3 +242,12 @@ export const getPublishedBlogs = () =>
         where('published', '==', true),
         orderBy('createdAt', 'desc')
     );
+
+export const getServices = () =>
+    getCollectionDocs<Service>('services', orderBy('order', 'asc'));
+
+export const getWorkflows = () =>
+    getCollectionDocs<Workflow>('workflows', orderBy('order', 'asc'));
+
+export const getAllClients = () =>
+    getCollectionDocs<Client>('clients', orderBy('order', 'asc'));
