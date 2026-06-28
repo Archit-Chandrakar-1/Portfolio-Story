@@ -53,10 +53,10 @@ export default function StorySection() {
             <div className="max-w-7xl mx-auto px-6">
                 {/* Header */}
                 <ScrollReveal className="text-center mb-20">
-                    <span className="bg-navy text-lime text-xs font-semibold px-4 py-1.5 rounded-full tracking-wider uppercase mb-4 inline-block">
+                    <span className="bg-lime text-navy text-xs font-semibold px-4 py-1.5 rounded-full tracking-wider uppercase mb-4 inline-block">
                         My Story
                     </span>
-                    <h2 className="font-display font-black text-4xl sm:text-5xl text-navy mt-4">
+                    <h2 className="font-display font-black text-4xl sm:text-5xl text-white mt-4">
                         How I <span className="relative inline-block">
                             Build Products
                             <span className="absolute -bottom-1 left-0 right-0 h-2 bg-lime/50 -z-10 rounded" />
@@ -75,7 +75,7 @@ export default function StorySection() {
                         return (
                             <motion.div key={beat.label} style={{ x: isLeft ? xLeft : xRight }}>
                                 <ScrollReveal delay={i * 0.1} direction={isLeft ? 'left' : 'right'}>
-                                    <div className="bg-white rounded-3xl p-8 border border-border card-hover h-full shadow-card">
+                                    <div className="bg-surface rounded-3xl p-8 border border-border card-hover h-full shadow-card">
                                         {/* Step badge */}
                                         <div className="flex items-center gap-3 mb-6">
                                             <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${beat.color === 'lime' ? 'bg-lime/25 border border-lime/40' : 'bg-mint/40 border border-mint/60'}`}>

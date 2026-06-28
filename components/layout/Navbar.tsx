@@ -3,9 +3,8 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence, useAnimationControls } from 'framer-motion';
-import { RiMenuLine, RiCloseLine, RiAdminLine, RiSunLine, RiMoonLine } from 'react-icons/ri';
+import { RiMenuLine, RiCloseLine, RiAdminLine } from 'react-icons/ri';
 import { useAuth } from '@/lib/AuthContext';
-import { useTheme } from '@/lib/ThemeContext';
 
 const navLinks = [
     { href: '/', label: 'Home' },
@@ -55,38 +54,27 @@ function RocketAnimation() {
 }
 
 export default function Navbar() {
-    const [scrolled, setScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
     const pathname = usePathname();
     const { isAdmin } = useAuth();
-    const { theme, toggle } = useTheme();
-
-    useEffect(() => {
-        const handler = () => setScrolled(window.scrollY > 20);
-        window.addEventListener('scroll', handler);
-        return () => window.removeEventListener('scroll', handler);
-    }, []);
 
     return (
         <motion.header
             initial={{ y: -80, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
-            className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled
-                ? 'bg-white/95 dark:bg-navy-dark/95 backdrop-blur-xl py-3 border-b border-border shadow-sm'
-                : 'py-5 bg-transparent'
-                }`}
+            className="fixed top-0 inset-x-0 z-50 py-5 bg-transparent"
         >
             <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
                 {/* Logo with rocket flying over it */}
                 <Link href="/" className="flex items-center gap-2 group relative">
                     <RocketAnimation />
-                    <div className="w-9 h-9 rounded-xl bg-navy dark:bg-lime flex items-center justify-center font-display font-bold text-sm text-lime dark:text-navy shadow-md transition-colors">
+                    <div className="w-9 h-9 rounded-xl bg-lime flex items-center justify-center font-display font-bold text-sm text-navy shadow-md">
                         AC
                     </div>
-                    <span className="font-display font-semibold text-navy dark:text-white hidden sm:block tracking-tight">
+                    <span className="font-display font-semibold text-white hidden sm:block tracking-tight">
                         Archit
-                        <span className="text-navy/50 dark:text-white/50 ml-1">Chandrakar</span>
+                        <span className="text-white/50 ml-1">Chandrakar</span>
                     </span>
                 </Link>
 
@@ -99,14 +87,14 @@ export default function Navbar() {
                                 key={link.href}
                                 href={link.href}
                                 className={`relative px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${active
-                                    ? 'text-navy dark:text-white'
-                                    : 'text-navy dark:text-white/60 hover:text-navy dark:hover:text-white'
+                                    ? 'text-white'
+                                    : 'text-white/60 hover:text-white'
                                     }`}
                             >
                                 {active && (
                                     <motion.span
                                         layoutId="nav-pill"
-                                        className="absolute inset-0 bg-lime/30 dark:bg-lime/20 rounded-xl border border-lime/50"
+                                        className="absolute inset-0 bg-lime/20 rounded-xl border border-lime/50"
                                         transition={{ type: 'spring', bounce: 0.2, duration: 0.4 }}
                                     />
                                 )}
@@ -118,31 +106,10 @@ export default function Navbar() {
 
                 {/* Right side */}
                 <div className="flex items-center gap-2">
-                    {/* Theme toggle */}
-                    <motion.button
-                        onClick={toggle}
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        className="w-9 h-9 rounded-xl bg-white dark:bg-white/10 border border-border dark:border-white/15 flex items-center justify-center text-navy dark:text-white/70 hover:border-lime/50 transition-all shadow-sm"
-                        aria-label="Toggle theme"
-                    >
-                        <AnimatePresence mode="wait">
-                            {theme === 'dark' ? (
-                                <motion.span key="sun" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
-                                    <RiSunLine size={16} className="text-lime" />
-                                </motion.span>
-                            ) : (
-                                <motion.span key="moon" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
-                                    <RiMoonLine size={16} />
-                                </motion.span>
-                            )}
-                        </AnimatePresence>
-                    </motion.button>
-
                     {isAdmin && (
                         <Link
                             href="/admin"
-                            className="hidden md:flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium text-navy dark:text-white bg-lime/20 border border-lime/40 hover:bg-lime/40 transition-all duration-200"
+                            className="hidden md:flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium text-white bg-lime/20 border border-lime/40 hover:bg-lime/40 transition-all duration-200"
                         >
                             <RiAdminLine size={14} />
                             Admin
@@ -158,7 +125,7 @@ export default function Navbar() {
                     {/* Mobile hamburger */}
                     <button
                         onClick={() => setMobileOpen(!mobileOpen)}
-                        className="md:hidden p-2 rounded-xl bg-white dark:bg-white/10 border border-border dark:border-white/15 text-navy dark:text-white/70 hover:text-navy transition-colors shadow-sm"
+                        className="md:hidden p-2 rounded-xl bg-white/10 border border-white/15 text-white/80 hover:text-white transition-colors"
                     >
                         {mobileOpen ? <RiCloseLine size={20} /> : <RiMenuLine size={20} />}
                     </button>
@@ -173,7 +140,7 @@ export default function Navbar() {
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="md:hidden overflow-hidden bg-white/98 dark:bg-navy-dark/98 border-t border-border dark:border-white/10 shadow-md"
+                        className="md:hidden overflow-hidden bg-surface/98 backdrop-blur-xl border-t border-white/10 shadow-md"
                     >
                         <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-1">
                             {navLinks.map((link) => (
@@ -182,8 +149,8 @@ export default function Navbar() {
                                     href={link.href}
                                     onClick={() => setMobileOpen(false)}
                                     className={`px-4 py-3 rounded-xl text-sm font-medium transition-colors ${pathname === link.href
-                                        ? 'text-navy dark:text-white bg-lime/20 border border-lime/30'
-                                        : 'text-navy dark:text-white/60 hover:text-navy dark:hover:text-white hover:bg-navy/5 dark:hover:bg-white/5'
+                                        ? 'text-white bg-lime/20 border border-lime/30'
+                                        : 'text-white/60 hover:text-white hover:bg-white/5'
                                         }`}
                                 >
                                     {link.label}
@@ -193,7 +160,7 @@ export default function Navbar() {
                                 <Link
                                     href="/admin"
                                     onClick={() => setMobileOpen(false)}
-                                    className="px-4 py-3 rounded-xl text-sm font-medium text-navy dark:text-white"
+                                    className="px-4 py-3 rounded-xl text-sm font-medium text-white"
                                 >
                                     Admin Panel
                                 </Link>

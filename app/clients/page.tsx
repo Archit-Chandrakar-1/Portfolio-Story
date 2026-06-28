@@ -1,4 +1,4 @@
-import { getAllClients } from '@/lib/firestore';
+import { getClients } from '@/lib/firestore';
 import ClientsSection from '@/components/sections/ClientsSection';
 
 export const dynamic = 'force-dynamic';
@@ -9,8 +9,7 @@ export const metadata = {
 };
 
 export default async function ClientsPage() {
-    const allClients = await getAllClients();
-    const clients = allClients.filter(c => c.published);
+    const clients = await getClients();
     return (
         <main className="min-h-screen bg-bg pt-32 pb-20">
             <ClientsSection clients={clients} />

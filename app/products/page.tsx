@@ -1,5 +1,6 @@
 import { getProjects } from '@/lib/firestore';
 import ScrollReveal from '@/components/ui/ScrollReveal';
+import ProductsHeroVideo from '@/components/sections/ProductsHeroVideo';
 import { RiExternalLinkLine, RiStarLine, RiArrowRightLine } from 'react-icons/ri';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -19,19 +20,24 @@ export default async function ProductsPage() {
     const rest = data.filter((p) => !p.featured);
 
     return (
-        <div className="min-h-screen pt-32 pb-20">
-            <div className="max-w-7xl mx-auto px-6">
-                {/* Header */}
-                <ScrollReveal className="text-center mb-16">
-                    <span className="glass border border-violet/30 text-violet-light text-xs font-semibold px-4 py-1.5 rounded-full tracking-wider uppercase mb-4 inline-block">Portfolio</span>
-                    <h1 className="font-display font-black text-4xl sm:text-5xl text-text-primary mt-4">
-                        Products I've <span className="gradient-text">Built</span>
-                    </h1>
-                    <p className="text-text-secondary mt-4 max-w-xl mx-auto">
-                        A selection of products I've led from concept to launch, each with a story of discovery, design, and delivery.
-                    </p>
-                </ScrollReveal>
+        <div className="min-h-screen pb-20">
+            {/* Hero with scrubbing video background */}
+            <section className="relative w-full h-[60vh] sm:h-[65vh] min-h-[420px] flex items-center justify-center overflow-hidden pt-20">
+                <ProductsHeroVideo />
+                <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
+                    <ScrollReveal className="text-center">
+                        <span className="glass border border-violet/30 text-violet-light text-xs font-semibold px-4 py-1.5 rounded-full tracking-wider uppercase mb-4 inline-block">Portfolio</span>
+                        <h1 className="font-display font-black text-4xl sm:text-5xl text-text-primary mt-4">
+                            Products I've <span className="gradient-text">Built</span>
+                        </h1>
+                        <p className="text-text-secondary mt-4 max-w-xl mx-auto">
+                            A selection of products I've led from concept to launch, each with a story of discovery, design, and delivery.
+                        </p>
+                    </ScrollReveal>
+                </div>
+            </section>
 
+            <div className="max-w-7xl mx-auto px-6 mt-16">
                 {/* Featured products */}
                 {featured.length > 0 && (
                     <div className="grid lg:grid-cols-2 gap-6 mb-8">

@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { AuthProvider } from '@/lib/AuthContext';
-import { ThemeProvider } from '@/lib/ThemeContext';
 import PublicShell from '@/components/layout/PublicShell';
 
 export const metadata: Metadata = {
@@ -18,12 +17,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en" className="scroll-smooth">
-            <body className="bg-bg dark:bg-navy-dark min-h-screen overflow-x-hidden transition-colors duration-300">
-                <ThemeProvider>
-                    <AuthProvider>
-                        <PublicShell>{children}</PublicShell>
-                    </AuthProvider>
-                </ThemeProvider>
+            <body className="bg-bg min-h-screen overflow-x-hidden">
+                <AuthProvider>
+                    <PublicShell>{children}</PublicShell>
+                </AuthProvider>
             </body>
         </html>
     );

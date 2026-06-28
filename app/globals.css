@@ -5,29 +5,13 @@
 @tailwind utilities;
 
 :root {
-  --bg: #F7F6F2;
+  --bg: #0A0A12;
   --surface: #FFFFFF;
   --border: #E8E6DF;
   --navy: #12122A;
   --lime: #D4E84A;
-  --mint: #B8D8E8;
+  --mint: #D4E84A;
 }
-
-/* Dark mode overrides */
-.dark {
-  --bg: #0F0F1E;
-  --surface: #1A1A2E;
-  --border: #2A2A45;
-  --navy: #F7F6F2;
-  --lime: #D4E84A;
-  --mint: #4A7A9B;
-}
-
-.dark body {
-  background-color: var(--bg);
-  color: var(--navy);
-}
-
 
 * {
   box-sizing: border-box;
@@ -41,7 +25,7 @@ html {
 
 body {
   background-color: var(--bg);
-  color: var(--navy);
+  color: #F2F2F5;
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
 }
@@ -64,7 +48,7 @@ body {
 .light-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  box-shadow: 0 2px 20px rgba(18, 18, 42, 0.06), 0 1px 4px rgba(18, 18, 42, 0.04);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3), 0 1px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Legacy alias — used in old components */
@@ -83,9 +67,9 @@ body {
   box-shadow: 0 4px 24px rgba(18, 18, 42, 0.08);
 }
 
-/* Gradient Text — lime to navy */
+/* Gradient Text — lime shades only */
 .gradient-text {
-  background: linear-gradient(135deg, #BACE35 0%, #12122A 100%);
+  background: linear-gradient(135deg, #E3F368 0%, #BACE35 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -187,12 +171,12 @@ body {
 .card-hover:hover {
   transform: translateY(-6px);
   border-color: rgba(212, 232, 74, 0.5) !important;
-  box-shadow: 0 20px 60px rgba(18, 18, 42, 0.12), 0 0 0 1px rgba(212, 232, 74, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(212, 232, 74, 0.3);
 }
 
 /* Grid dot pattern */
 .dot-pattern {
-  background-image: radial-gradient(rgba(18, 18, 42, 0.07) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
@@ -214,13 +198,13 @@ body {
 
 /* Timeline connector */
 .timeline-line {
-  background: linear-gradient(180deg, transparent, #D4E84A, #B8D8E8, transparent);
+  background: linear-gradient(180deg, transparent, #D4E84A, #BACE35, transparent);
 }
 
 /* Button styles */
 .btn-primary {
-  background: var(--navy);
-  color: #F7F6F2;
+  background: var(--lime);
+  color: var(--navy);
   border: none;
   border-radius: 12px;
   font-weight: 600;
@@ -248,14 +232,14 @@ body {
 }
 
 .btn-primary:hover {
-  box-shadow: 0 8px 30px rgba(18, 18, 42, 0.25);
+  box-shadow: 0 8px 30px rgba(212, 232, 74, 0.35);
   transform: translateY(-2px);
 }
 
 .btn-secondary {
   background: transparent;
-  border: 1.5px solid rgba(18, 18, 42, 0.2);
-  color: var(--navy);
+  border: 1.5px solid rgba(212, 232, 74, 0.4);
+  color: var(--lime);
   border-radius: 12px;
   font-weight: 600;
   cursor: pointer;
@@ -266,9 +250,9 @@ body {
 }
 
 .btn-secondary:hover {
-  background: rgba(18, 18, 42, 0.05);
-  border-color: rgba(18, 18, 42, 0.4);
-  box-shadow: 0 4px 16px rgba(18, 18, 42, 0.1);
+  background: rgba(212, 232, 74, 0.08);
+  border-color: rgba(212, 232, 74, 0.6);
+  box-shadow: 0 4px 16px rgba(212, 232, 74, 0.15);
 }
 
 /* Admin form styles — always dark */

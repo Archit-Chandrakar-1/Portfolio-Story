@@ -13,10 +13,10 @@ export default function FeaturedProducts({ products }: { products: Product[] }) 
                 {/* Header */}
                 <ScrollReveal className="flex flex-col sm:flex-row sm:items-end justify-between mb-14 gap-6">
                     <div>
-                        <span className="bg-navy text-lime text-xs font-semibold px-4 py-1.5 rounded-full tracking-wider uppercase mb-4 inline-block">
+                        <span className="bg-lime text-navy text-xs font-semibold px-4 py-1.5 rounded-full tracking-wider uppercase mb-4 inline-block">
                             Portfolio
                         </span>
-                        <h2 className="font-display font-black text-4xl sm:text-5xl text-navy mt-3">
+                        <h2 className="font-display font-black text-4xl sm:text-5xl text-white mt-3">
                             Products I've{' '}
                             <span className="relative inline-block">
                                 Built
@@ -39,7 +39,7 @@ export default function FeaturedProducts({ products }: { products: Product[] }) 
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {display.map((product, i) => (
                         <ScrollReveal key={product.id} delay={i * 0.1} direction="up">
-                            <div className="bg-white rounded-3xl overflow-hidden border border-border card-hover h-full flex flex-col group shadow-card">
+                            <div className="bg-surface rounded-3xl overflow-hidden border border-border card-hover h-full flex flex-col group shadow-card">
                                 {/* Image / placeholder */}
                                 <div className="h-44 relative bg-mint/30 flex items-center justify-center overflow-hidden">
                                     {product.imageUrl ? (

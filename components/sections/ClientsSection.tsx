@@ -10,7 +10,7 @@ function ClientCard({ client, index }: { client: Client; index: number }) {
                 href={client.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group bg-white rounded-3xl overflow-hidden border border-border card-hover h-full flex flex-col shadow-card"
+                className="group bg-surface rounded-3xl overflow-hidden border border-border card-hover h-full flex flex-col shadow-card"
             >
                 {/* Logo area */}
                 <div className="h-36 relative bg-mint/20 flex items-center justify-center overflow-hidden border-b border-border">
@@ -70,10 +70,10 @@ export default function ClientsSection({ clients }: { clients: Client[] }) {
         <div className="max-w-7xl mx-auto px-6">
             {/* Header */}
             <ScrollReveal className="mb-14">
-                <span className="bg-navy text-lime text-xs font-semibold px-4 py-1.5 rounded-full tracking-wider uppercase mb-4 inline-block">
+                <span className="bg-lime text-navy text-xs font-semibold px-4 py-1.5 rounded-full tracking-wider uppercase mb-4 inline-block">
                     Freelance Work
                 </span>
-                <h1 className="font-display font-black text-4xl sm:text-5xl text-navy mt-3">
+                <h1 className="font-display font-black text-4xl sm:text-5xl text-white mt-3">
                     Clients I&apos;ve{' '}
                     <span className="relative inline-block">
                         Worked With

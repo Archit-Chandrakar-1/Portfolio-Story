@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { RiLinkedinFill, RiTwitterXFill, RiInstagramLine, RiGithubFill, RiMailLine, RiWhatsappLine, RiMediumLine, RiExternalLinkLine } from 'react-icons/ri';
 import { motion } from 'framer-motion';
+import FooterRevealBackground from '@/components/layout/FooterRevealBackground';
 
 const navLinks = [
     { href: '/about', label: 'About' },
@@ -14,14 +15,14 @@ export default function Footer() {
     const year = new Date().getFullYear();
 
     return (
-        <footer className="relative bg-navy mt-20">
-            {/* Subtle dot pattern */}
-            <div className="absolute inset-0 opacity-10 dot-pattern pointer-events-none" />
+        <footer className="relative bg-navy mt-20 min-h-[640px] flex flex-col overflow-hidden">
+            {/* Cursor-spotlight reveal background */}
+            <FooterRevealBackground />
 
             {/* Lime top accent bar */}
-            <div className="h-1 w-full bg-lime" />
+            <div className="relative z-10 h-1 w-full bg-lime" />
 
-            <div className="relative max-w-7xl mx-auto px-6 py-16">
+            <div className="relative z-10 max-w-7xl mx-auto px-6 py-16 flex-1 flex flex-col justify-center">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
                     {/* Brand */}
                     <div>
@@ -33,7 +34,7 @@ export default function Footer() {
                                 Archit <span className="text-lime">Chandrakar</span>
                             </span>
                         </div>
-                        <p className="text-white/50 text-sm leading-relaxed max-w-xs">
+                        <p className="text-white text-sm leading-relaxed max-w-xs">
                             Product Manager crafting impactful digital experiences. Building products that matter.
                         </p>
                     </div>
@@ -44,7 +45,7 @@ export default function Footer() {
                         <ul className="space-y-2">
                             {navLinks.map((l) => (
                                 <li key={l.href}>
-                                    <Link href={l.href} className="text-white/50 text-sm hover:text-lime transition-colors duration-200">
+                                    <Link href={l.href} className="text-white text-sm hover:text-lime transition-colors duration-200">
                                         {l.label}
                                     </Link>
                                 </li>
@@ -73,7 +74,7 @@ export default function Footer() {
                                     rel="noopener noreferrer"
                                     whileHover={{ scale: 1.1, y: -2 }}
                                     whileTap={{ scale: 0.95 }}
-                                    className="w-10 h-10 rounded-xl bg-white/8 border border-white/12 flex items-center justify-center text-white/50 hover:text-lime hover:border-lime/40 transition-colors duration-200"
+                                    className="w-10 h-10 rounded-xl bg-white/8 border border-white/12 flex items-center justify-center text-white hover:text-lime hover:border-lime/40 transition-colors duration-200"
                                     aria-label={label}
                                 >
                                     <Icon size={16} />
@@ -84,10 +85,10 @@ export default function Footer() {
                 </div>
 
                 <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <p className="text-white/30 text-xs">
+                    <p className="text-white text-xs">
                         © {year} Archit Chandrakar. All rights reserved.
                     </p>
-                    <p className="text-white/30 text-xs">
+                    <p className="text-white text-xs">
                         Built with{' '}
                         <span className="text-lime font-medium">Next.js + Firebase</span>
                     </p>

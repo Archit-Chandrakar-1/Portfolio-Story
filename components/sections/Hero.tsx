@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import Link from 'next/link';
 import { RiArrowDownLine, RiLinkedinFill, RiTwitterXFill, RiInstagramLine, RiGithubFill, RiWhatsappLine, RiMediumLine, RiExternalLinkLine } from 'react-icons/ri';
 import { AboutData } from '@/lib/firestore';
+import LotusBackground from '@/components/sections/LotusBackground';
 
 const TITLES = [
     'Product Manager',
@@ -12,7 +13,7 @@ const TITLES = [
     'Builder of Products',
 ];
 
-function TypewriterText({ texts }: { texts: string[] }) {
+function TypewriterText({ texts, colorClassName = 'text-navy' }: { texts: string[]; colorClassName?: string }) {
     const [index, setIndex] = useState(0);
     const [displayed, setDisplayed] = useState('');
     const [deleting, setDeleting] = useState(false);
@@ -36,7 +37,7 @@ function TypewriterText({ texts }: { texts: string[] }) {
     }, [displayed, deleting, index, texts]);
 
     return (
-        <span className="text-navy">
+        <span className={colorClassName}>
             {displayed}
             <span className="animate-pulse text-lime">|</span>
         </span>
@@ -76,14 +77,9 @@ export default function Hero({ about }: HeroProps) {
     };
 
     return (
-        <section ref={ref} className="relative min-h-screen flex items-center overflow-hidden animated-gradient-bg">
-            {/* Decorative blobs */}
-            <div className="absolute top-1/4 -left-40 w-[500px] h-[500px] bg-lime/25 blob pointer-events-none" />
-            <div className="absolute bottom-1/4 -right-40 w-[450px] h-[450px] bg-mint/40 blob pointer-events-none" style={{ animationDelay: '3s' }} />
-            <div className="absolute top-2/3 left-1/3 w-72 h-72 bg-lime/15 blob pointer-events-none" style={{ animationDelay: '6s' }} />
-
-            {/* Dot grid overlay */}
-            <div className="absolute inset-0 dot-pattern pointer-events-none opacity-60" />
+        <section ref={ref} className="relative min-h-screen flex items-center overflow-hidden">
+            {/* Lotus video background */}
+            <LotusBackground />
 
             {/* Scroll-parallax wrapper */}
             <motion.div style={{ y, opacity }} className="relative z-10 w-full">
@@ -97,7 +93,7 @@ export default function Hero({ about }: HeroProps) {
                         </motion.div>
 
                         {/* Name */}
-                        <motion.h1 variants={item} className="font-display font-black text-5xl sm:text-6xl lg:text-8xl text-navy leading-[1.05] mb-4">
+                        <motion.h1 variants={item} className="font-display font-black text-5xl sm:text-6xl lg:text-8xl text-white leading-[1.05] mb-4">
                             {name.split(' ').map((word, i) => (
                                 <span key={i} className={i === 1 ? 'relative inline-block' : ''}>
                                     {i === 1 ? (
@@ -115,11 +111,11 @@ export default function Hero({ about }: HeroProps) {
 
                         {/* Typewriter */}
                         <motion.div variants={item} className="font-display font-semibold text-2xl sm:text-3xl lg:text-4xl mb-6 h-12 flex items-center">
-                            <TypewriterText texts={TITLES} />
+                            <TypewriterText texts={TITLES} colorClassName="text-white" />
                         </motion.div>
 
                         {/* Sub-headline */}
-                        <motion.p variants={item} className="text-text-secondary text-lg sm:text-xl leading-relaxed max-w-2xl mb-10">
+                        <motion.p variants={item} className="text-white/75 text-lg sm:text-xl leading-relaxed max-w-2xl mb-10">
                             {subHeadline}
                         </motion.p>
 
@@ -128,15 +124,15 @@ export default function Hero({ about }: HeroProps) {
                             <Link href="/products" className="btn-primary px-8 py-3.5 text-base rounded-2xl">
                                 View My Work
                             </Link>
-                            <Link href="/about" className="btn-secondary px-8 py-3.5 text-base rounded-2xl">
+                            <Link href="/about" className="inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold rounded-2xl border-[1.5px] border-white/30 text-white hover:bg-white/10 hover:border-white/50 transition-all duration-300">
                                 About Me
                             </Link>
                         </motion.div>
 
                         {/* Socials */}
                         <motion.div variants={item} className="flex items-center gap-4">
-                            <span className="text-text-muted text-sm">Find me on</span>
-                            <div className="h-px w-8 bg-border" />
+                            <span className="text-white/60 text-sm">Find me on</span>
+                            <div className="h-px w-8 bg-white/25" />
                             <div className="flex gap-3">
                                 {SOCIALS.map(({ icon: Icon, href, label }) => (
                                     <motion.a
@@ -146,7 +142,7 @@ export default function Hero({ about }: HeroProps) {
                                         rel="noopener noreferrer"
                                         whileHover={{ scale: 1.15, y: -2 }}
                                         whileTap={{ scale: 0.9 }}
-                                        className="w-10 h-10 bg-white border border-border rounded-xl flex items-center justify-center text-text-secondary hover:text-navy hover:border-lime/50 hover:shadow-lime transition-all duration-200 shadow-card"
+                                        className="w-10 h-10 bg-surface border border-border rounded-xl flex items-center justify-center text-text-secondary hover:text-navy hover:border-lime/50 hover:shadow-lime transition-all duration-200 shadow-card"
                                         aria-label={label}
                                     >
                                         <Icon size={16} />
@@ -186,7 +182,7 @@ export default function Hero({ about }: HeroProps) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 2 }}
-                className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-text-muted"
+                className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/60"
             >
                 <span className="text-xs uppercase tracking-widest">Scroll</span>
                 <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}>

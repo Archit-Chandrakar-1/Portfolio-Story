@@ -10,7 +10,7 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                bg: "#F7F6F2",
+                bg: "#0A0A12",
                 surface: "#FFFFFF",
                 border: "#E8E6DF",
                 navy: {
@@ -24,9 +24,19 @@ const config: Config = {
                     dark: "#BACE35",
                 },
                 mint: {
-                    DEFAULT: "#B8D8E8",
-                    light: "#D0E9F4",
-                    dark: "#8FBFD6",
+                    DEFAULT: "#D4E84A",
+                    light: "#E3F368",
+                    dark: "#BACE35",
+                },
+                violet: {
+                    DEFAULT: "#D4E84A",
+                    light: "#E3F368",
+                    dark: "#BACE35",
+                },
+                cyan: {
+                    DEFAULT: "#D4E84A",
+                    light: "#E3F368",
+                    dark: "#BACE35",
                 },
                 text: {
                     primary: "#12122A",
@@ -44,8 +54,8 @@ const config: Config = {
                 "glow-mint": "radial-gradient(circle at center, rgba(184,216,232,0.25) 0%, transparent 70%)",
             },
             boxShadow: {
-                "card": "0 2px 20px rgba(18,18,42,0.06), 0 1px 4px rgba(18,18,42,0.04)",
-                "card-hover": "0 12px 40px rgba(18,18,42,0.12), 0 4px 12px rgba(18,18,42,0.06)",
+                "card": "0 2px 20px rgba(0,0,0,0.35), 0 1px 4px rgba(0,0,0,0.25)",
+                "card-hover": "0 12px 40px rgba(0,0,0,0.45), 0 4px 12px rgba(0,0,0,0.3)",
                 "lime": "0 4px 24px rgba(212,232,74,0.35)",
             },
             animation: {
