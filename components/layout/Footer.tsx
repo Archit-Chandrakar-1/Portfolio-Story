@@ -7,6 +7,7 @@ import FooterRevealBackground from '@/components/layout/FooterRevealBackground';
 const navLinks = [
     { href: '/about', label: 'About' },
     { href: '/products', label: 'Products' },
+    { href: '/workflows', label: 'Workflows' },
     { href: '/certifications', label: 'Certifications' },
     { href: '/blogs', label: 'Blogs' },
 ];

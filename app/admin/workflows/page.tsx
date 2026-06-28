@@ -1,14 +1,21 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { getWorkflows, addDocument, updateDocument, deleteDocument, Workflow, WorkflowNode, WorkflowTag } from '@/lib/firestore';
+import { getWorkflows, addDocument, updateDocument, deleteDocument, Workflow, WorkflowNode, WorkflowTag, WorkflowCaseStudy } from '@/lib/firestore';
 import toast from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RiAddLine, RiDeleteBinLine, RiSaveLine, RiEyeLine, RiEyeOffLine, RiDragMove2Line } from 'react-icons/ri';
+
+const EMPTY_CASE_STUDY: WorkflowCaseStudy = {
+    why: { heading: '', body: '' },
+    how: { heading: '', body: '' },
+    results: { heading: '', body: '' },
+};
 
 const EMPTY: Omit<Workflow, 'id'> = {
     title: '', description: '', problem: '', outcome: '',
     tags: [], imageUrl: '', tool: '', impact: '', nodes: [],
     liveLink: '', githubLink: '', notionLink: '', order: 0,
+    caseStudy: { ...EMPTY_CASE_STUDY },
 };
 
 const TextField = ({ label, value, onChange, type = 'text', rows }: { label: string; value: string; onChange: (v: string) => void; type?: string; rows?: number }) => (
@@ -56,6 +63,40 @@ const NodeEditor = ({ nodes, onChange }: { nodes: WorkflowNode[]; onChange: (n: 
     );
 };
 
+const CaseStudyEditor = ({ caseStudy, onChange }: { caseStudy: WorkflowCaseStudy; onChange: (cs: WorkflowCaseStudy) => void }) => {
+    const sections: { key: keyof WorkflowCaseStudy; label: string }[] = [
+        { key: 'why', label: 'Why (the problem)' },
+        { key: 'how', label: 'How (the build)' },
+        { key: 'results', label: 'Results (the outcome)' },
+    ];
+
+    return (
+        <div className="border border-white/10 rounded-xl p-4 bg-white/5 space-y-4">
+            <label className="text-text-secondary text-xs font-medium block">
+                Case Study (powers the full /workflows/[id] page — leave blank to skip)
+            </label>
+            {sections.map(({ key, label }) => (
+                <div key={key} className="grid sm:grid-cols-2 gap-2 border-t border-white/5 pt-3 first:border-t-0 first:pt-0">
+                    <input
+                        type="text"
+                        value={caseStudy[key].heading}
+                        onChange={e => onChange({ ...caseStudy, [key]: { ...caseStudy[key], heading: e.target.value } })}
+                        className="admin-input px-3 py-2 text-sm sm:col-span-2"
+                        placeholder={`${label} — heading`}
+                    />
+                    <textarea
+                        value={caseStudy[key].body}
+                        onChange={e => onChange({ ...caseStudy, [key]: { ...caseStudy[key], body: e.target.value } })}
+                        rows={3}
+                        className="admin-input p-3 text-sm resize-none sm:col-span-2"
+                        placeholder={`${label} — body`}
+                    />
+                </div>
+            ))}
+        </div>
+    );
+};
+
 const ItemForm = ({ data, set, onSave, onCancel, saveLabel }: { data: Omit<Workflow, 'id'>; set: (d: Omit<Workflow, 'id'>) => void; onSave: () => void; onCancel: () => void; saveLabel: string }) => (
     <div className="space-y-4">
         <div className="grid sm:grid-cols-2 gap-3">
@@ -73,6 +114,8 @@ const ItemForm = ({ data, set, onSave, onCancel, saveLabel }: { data: Omit<Workf
         </div>
 
         <NodeEditor nodes={data.nodes} onChange={nodes => set({ ...data, nodes })} />
+
+        <CaseStudyEditor caseStudy={data.caseStudy ?? EMPTY_CASE_STUDY} onChange={caseStudy => set({ ...data, caseStudy })} />
 
         <div className="grid sm:grid-cols-3 gap-3">
             <TextField label="Live Link (Optional)" value={data.liveLink || ''} onChange={v => set({ ...data, liveLink: v })} type="url" />

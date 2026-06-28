@@ -130,6 +130,17 @@ export interface WorkflowNode {
     tool: string;
 }
 
+export interface WorkflowCaseStudySection {
+    heading: string;
+    body: string;
+}
+
+export interface WorkflowCaseStudy {
+    why: WorkflowCaseStudySection;
+    how: WorkflowCaseStudySection;
+    results: WorkflowCaseStudySection;
+}
+
 export interface Workflow {
     id?: string;
     title: string;
@@ -145,6 +156,7 @@ export interface Workflow {
     githubLink?: string;
     notionLink?: string;
     order?: number;
+    caseStudy?: WorkflowCaseStudy;
 }
 
 export interface Client {

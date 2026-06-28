@@ -11,8 +11,10 @@ import {
     RiNotionLine,
     RiArrowDownSLine,
     RiFlowChart,
+    RiFileTextLine,
 } from 'react-icons/ri';
 import type { Workflow, WorkflowTag } from '@/lib/firestore';
+import WorkflowTimeline from './WorkflowTimeline';
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -26,38 +28,6 @@ const TAG_STYLES: Record<WorkflowTag, string> = {
     GTM: 'bg-rose-100 text-rose-700 border-rose-200',
 };
 
-// ─── Node Flow (pipeline visualiser) ─────────────────────────────────────────
-
-function NodeFlow({ nodes }: { nodes: Workflow['nodes'] }) {
-    return (
-        <div className="flex items-start gap-0 flex-wrap">
-            {nodes.map((node, i) => (
-                <div key={i} className="flex items-start">
-                    {/* Node pill */}
-                    <div className="flex flex-col items-center gap-1">
-                        <div className="w-9 h-9 rounded-xl bg-mint/40 border border-border flex items-center justify-center text-base">
-                            {node.icon}
-                        </div>
-                        <span className="text-[10px] font-medium text-navy leading-tight text-center max-w-[48px]">
-                            {node.label}
-                        </span>
-                        <span className="text-[9px] text-text-secondary">
-                            {node.tool}
-                        </span>
-                    </div>
-
-                    {/* Arrow connector */}
-                    {i < nodes.length - 1 && (
-                        <div className="flex items-center mt-[14px] mx-1">
-                            <div className="w-3 h-px bg-border" />
-                            <RiArrowRightLine size={10} className="text-text-secondary -ml-0.5" />
-                        </div>
-                    )}
-                </div>
-            ))}
-        </div>
-    );
-}
 
 // ─── Workflow Card ─────────────────────────────────────────────────────────────
 
@@ -80,7 +50,7 @@ function WorkflowCard({ workflow, index }: { workflow: Workflow; index: number }
                     ) : (
                         <div className="flex flex-col items-center gap-3 px-4">
                             <RiFlowChart size={22} className="text-navy/30" />
-                            <NodeFlow nodes={workflow.nodes} />
+                            <WorkflowTimeline nodes={workflow.nodes} size="compact" />
                         </div>
                     )}
 
@@ -146,7 +116,7 @@ function WorkflowCard({ workflow, index }: { workflow: Workflow; index: number }
                                         Pipeline
                                     </p>
                                     <div className="bg-mint/20 rounded-2xl p-3 border border-border">
-                                        <NodeFlow nodes={workflow.nodes} />
+                                        <WorkflowTimeline nodes={workflow.nodes} size="compact" />
                                     </div>
                                 </div>
                             )}
@@ -167,6 +137,14 @@ function WorkflowCard({ workflow, index }: { workflow: Workflow; index: number }
                         </button>
 
                         <div className="flex items-center gap-3">
+                            {workflow.caseStudy?.why?.heading && (
+                                <Link
+                                    href={`/workflows/${workflow.id}`}
+                                    className="flex items-center gap-1 text-xs font-bold text-navy hover:text-lime-dark transition-colors"
+                                >
+                                    Case Study <RiFileTextLine size={11} />
+                                </Link>
+                            )}
                             {workflow.liveLink && (
                                 <a
                                     href={workflow.liveLink}
@@ -226,17 +204,17 @@ export default function WorkflowsSection({ workflows }: { workflows: Workflow[] 
                 {/* Header */}
                 <ScrollReveal className="flex flex-col sm:flex-row sm:items-end justify-between mb-14 gap-6">
                     <div>
-                        <span className="bg-navy text-lime text-xs font-semibold px-4 py-1.5 rounded-full tracking-wider uppercase mb-4 inline-block">
+                        <span className="bg-lime text-navy text-xs font-semibold px-4 py-1.5 rounded-full tracking-wider uppercase mb-4 inline-block">
                             Automation & AI
                         </span>
-                        <h2 className="font-display font-black text-4xl sm:text-5xl text-navy mt-3">
+                        <h2 className="font-display font-black text-4xl sm:text-5xl text-white mt-3">
                             Workflows I&apos;ve{' '}
                             <span className="relative inline-block">
                                 Built
                                 <span className="absolute -bottom-1 left-0 right-0 h-2.5 bg-lime/40 -z-10 rounded" />
                             </span>
                         </h2>
-                        <p className="text-text-secondary mt-3 max-w-md">
+                        <p className="text-white/70 mt-3 max-w-md">
                             I don&apos;t just define automation — I build it. Real pipelines that
                             eliminate manual work across research, analytics, and launch ops.
                         </p>
