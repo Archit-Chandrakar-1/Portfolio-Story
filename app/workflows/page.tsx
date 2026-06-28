@@ -1,3 +1,4 @@
+import WorkflowsHero from '@/components/sections/WorkflowsHero';
 import WorkflowsSection from '@/components/sections/WorkflowsSection';
 import { getWorkflows } from '@/lib/firestore';
 
@@ -12,7 +13,8 @@ export default async function WorkflowsPage() {
     const workflows = await getWorkflows();
 
     return (
-        <main className="min-h-screen pt-24 bg-bg">
+        <main className="min-h-screen bg-bg">
+            <WorkflowsHero />
             <WorkflowsSection workflows={workflows} />
         </main>
     );
