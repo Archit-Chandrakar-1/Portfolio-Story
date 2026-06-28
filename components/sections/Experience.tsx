@@ -33,13 +33,13 @@ export default function Experience({ experiences }: ExperienceProps) {
                         <span className="bg-mint/50 border border-mint text-navy text-xs font-semibold px-4 py-1.5 rounded-full tracking-wider uppercase mb-4 inline-block">
                             My Journey
                         </span>
-                        <h2 className="font-display font-black text-4xl sm:text-5xl text-navy mt-4">
+                        <h2 className="font-display font-black text-4xl sm:text-5xl text-white mt-4">
                             Experience <span className="relative inline-block">
                                 Timeline
                                 <span className="absolute -bottom-1 left-0 right-0 h-2 bg-lime/40 -z-10 rounded" />
                             </span>
                         </h2>
-                        <p className="text-text-secondary mt-4 max-w-xl mx-auto">
+                        <p className="text-white/70 mt-4 max-w-xl mx-auto">
                             A story of growth, impact, and relentless product thinking.
                         </p>
                     </div>

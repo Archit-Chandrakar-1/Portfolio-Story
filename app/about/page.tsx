@@ -1,5 +1,6 @@
 import { getSiteConfig } from '@/lib/firestore';
 import ScrollReveal from '@/components/ui/ScrollReveal';
+import AboutJetVideo from '@/components/sections/AboutJetVideo';
 import { RiMailSendLine, RiLinkedinFill, RiDownload2Line, RiMapPinLine } from 'react-icons/ri';
 import Image from 'next/image';
 import type { Metadata } from 'next';
@@ -29,12 +30,12 @@ export default async function AboutPage() {
                     <ScrollReveal direction="left">
                         <div>
                             <span className="glass border border-violet/30 text-violet-light text-xs font-semibold px-4 py-1.5 rounded-full tracking-wider uppercase mb-6 inline-block">About Me</span>
-                            <h1 className="font-display font-black text-4xl sm:text-5xl text-text-primary leading-tight mb-4">
+                            <h1 className="font-display font-black text-4xl sm:text-5xl text-white leading-tight mb-4">
                                 Hey, I'm{' '}
                                 <span className="gradient-text">{name.split(' ')[0]}</span>
                             </h1>
-                            <p className="text-text-secondary text-lg leading-relaxed mb-6">{headline}</p>
-                            <div className="flex items-center gap-2 text-text-muted text-sm mb-8">
+                            <p className="text-white/70 text-lg leading-relaxed mb-6">{headline}</p>
+                            <div className="flex items-center gap-2 text-white/50 text-sm mb-8">
                                 <RiMapPinLine size={14} className="text-cyan-light" />
                                 <span>{location}</span>
                             </div>
@@ -101,6 +102,11 @@ export default async function AboutPage() {
                         </ScrollReveal>
                     ))}
                 </div>
+
+                {/* Jet video banner */}
+                <ScrollReveal className="mt-12">
+                    <AboutJetVideo />
+                </ScrollReveal>
             </div>
         </div>
     );

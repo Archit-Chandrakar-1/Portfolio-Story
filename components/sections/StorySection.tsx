@@ -62,7 +62,7 @@ export default function StorySection() {
                             <span className="absolute -bottom-1 left-0 right-0 h-2 bg-lime/50 -z-10 rounded" />
                         </span>
                     </h2>
-                    <p className="text-text-secondary mt-4 max-w-xl mx-auto text-lg">
+                    <p className="text-white/70 mt-4 max-w-xl mx-auto text-lg">
                         Product management is storytelling. Here's the narrative behind how I work.
                     </p>
                 </ScrollReveal>

@@ -22,15 +22,15 @@ export default async function ProductsPage() {
     return (
         <div className="min-h-screen pb-20">
             {/* Hero with scrubbing video background */}
-            <section className="relative w-full h-[60vh] sm:h-[65vh] min-h-[420px] flex items-center justify-center overflow-hidden pt-20">
+            <section className="relative w-full h-screen min-h-[640px] flex items-center justify-center overflow-hidden pt-20">
                 <ProductsHeroVideo />
                 <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
-                    <ScrollReveal className="text-center">
+                    <ScrollReveal className="text-left max-w-2xl">
                         <span className="glass border border-violet/30 text-violet-light text-xs font-semibold px-4 py-1.5 rounded-full tracking-wider uppercase mb-4 inline-block">Portfolio</span>
-                        <h1 className="font-display font-black text-4xl sm:text-5xl text-text-primary mt-4">
+                        <h1 className="font-display font-black text-6xl sm:text-7xl lg:text-8xl text-text-primary mt-4">
                             Products I've <span className="gradient-text">Built</span>
                         </h1>
-                        <p className="text-text-secondary mt-4 max-w-xl mx-auto">
+                        <p className="text-text-secondary text-lg sm:text-xl mt-4">
                             A selection of products I've led from concept to launch, each with a story of discovery, design, and delivery.
                         </p>
                     </ScrollReveal>

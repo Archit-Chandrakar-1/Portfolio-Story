@@ -42,10 +42,10 @@ export default function ContactPage() {
                     <span className="glass border border-violet/30 text-violet-light text-xs font-semibold px-4 py-1.5 rounded-full tracking-wider uppercase mb-4 inline-block">
                         Contact
                     </span>
-                    <h1 className="font-display font-black text-4xl sm:text-5xl text-text-primary mt-4">
+                    <h1 className="font-display font-black text-4xl sm:text-5xl text-white mt-4">
                         Let's <span className="gradient-text">Connect</span>
                     </h1>
-                    <p className="text-text-secondary mt-4 max-w-xl mx-auto text-base leading-relaxed">
+                    <p className="text-white/70 mt-4 max-w-xl mx-auto text-base leading-relaxed">
                         Have a product idea, collaboration opportunity, or just want to say hi?
                         I'd love to hear from you.
                     </p>

@@ -5,8 +5,10 @@ import {
     RiExternalLinkLine,
     RiFilePdfLine,
     RiArrowRightLine,
+    RiPlayCircleLine,
 } from 'react-icons/ri';
 import type { Product } from '@/lib/firestore';
+import LiveDemoEmbed from './LiveDemoEmbed';
 
 // ─── Section step data ────────────────────────────────────────────────────────
 
@@ -125,6 +127,7 @@ function SectionBlock({
 
 export default function CaseStudyPage({ product }: Props) {
     const cs = product.caseStudy;
+
     if (!cs || !cs.problem || !cs.research || !cs.solution || !cs.learnings) {
         return <div>Case study data incomplete.</div>;
     }
@@ -179,12 +182,10 @@ export default function CaseStudyPage({ product }: Props) {
                     <div className="flex flex-wrap items-center gap-3">
                         {product.link && product.link !== '#' && (
                             <a
-                                href={product.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
+                                href="#live-demo"
                                 className="inline-flex items-center gap-2 bg-lime text-navy text-sm font-bold px-5 py-2.5 rounded-xl hover:bg-lime/90 transition-colors"
                             >
-                                View Live <RiExternalLinkLine size={14} />
+                                View Live <RiPlayCircleLine size={15} />
                             </a>
                         )}
                         {product.prdUrl && (
@@ -200,6 +201,13 @@ export default function CaseStudyPage({ product }: Props) {
                     </div>
                 </div>
             </div>
+
+            {/* ── Live demo embed ──────────────────────────────────────────── */}
+            {product.link && product.link !== '#' && (
+                <div id="live-demo" className="max-w-7xl mx-auto px-6 py-10 scroll-mt-24">
+                    <LiveDemoEmbed url={product.link} />
+                </div>
+            )}
 
             {/* ── Sticky progress nav ──────────────────────────────────────── */}
             <div className="sticky top-0 z-30 bg-bg/80 backdrop-blur-md border-b border-border">

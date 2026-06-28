@@ -28,10 +28,10 @@ export default async function BlogsPage() {
                 {/* Header */}
                 <ScrollReveal className="text-center mb-16">
                     <span className="glass border border-violet/30 text-violet-light text-xs font-semibold px-4 py-1.5 rounded-full tracking-wider uppercase mb-4 inline-block">Writing</span>
-                    <h1 className="font-display font-black text-4xl sm:text-5xl text-text-primary mt-4">
+                    <h1 className="font-display font-black text-4xl sm:text-5xl text-white mt-4">
                         Product <span className="gradient-text">Insights</span>
                     </h1>
-                    <p className="text-text-secondary mt-4 max-w-xl mx-auto">
+                    <p className="text-white/70 mt-4 max-w-xl mx-auto">
                         Essays, frameworks, and hard-won lessons from the product trenches.
                     </p>
                 </ScrollReveal>

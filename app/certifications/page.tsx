@@ -20,10 +20,10 @@ export default async function CertificationsPage() {
                 {/* Header */}
                 <ScrollReveal className="text-center mb-16">
                     <span className="glass border border-cyan/30 text-cyan-light text-xs font-semibold px-4 py-1.5 rounded-full tracking-wider uppercase mb-4 inline-block">Credentials</span>
-                    <h1 className="font-display font-black text-4xl sm:text-5xl text-text-primary mt-4">
+                    <h1 className="font-display font-black text-4xl sm:text-5xl text-white mt-4">
                         Certifications & <span className="gradient-text">Credentials</span>
                     </h1>
-                    <p className="text-text-secondary mt-4 max-w-xl mx-auto">
+                    <p className="text-white/70 mt-4 max-w-xl mx-auto">
                         Continuous learning is the PM superpower. Here's my commitment to staying sharp.
                     </p>
                 </ScrollReveal>

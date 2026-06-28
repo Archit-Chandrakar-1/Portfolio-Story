@@ -23,7 +23,7 @@ export default function FeaturedProducts({ products }: { products: Product[] }) 
                                 <span className="absolute -bottom-1 left-0 right-0 h-2.5 bg-lime/40 -z-10 rounded" />
                             </span>
                         </h2>
-                        <p className="text-text-secondary mt-3 max-w-md">
+                        <p className="text-white/70 mt-3 max-w-md">
                             From zero-to-one launches to scaling products to millions of users.
                         </p>
                     </div>

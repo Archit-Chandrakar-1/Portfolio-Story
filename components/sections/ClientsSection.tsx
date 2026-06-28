@@ -80,7 +80,7 @@ export default function ClientsSection({ clients }: { clients: Client[] }) {
                         <span className="absolute -bottom-1 left-0 right-0 h-2.5 bg-lime/40 -z-10 rounded" />
                     </span>
                 </h1>
-                <p className="text-text-secondary mt-3 max-w-xl text-base leading-relaxed">
+                <p className="text-white/70 mt-3 max-w-xl text-base leading-relaxed">
                     A selection of businesses and founders I&apos;ve partnered with — from early-stage
                     startups to growing products.
                 </p>

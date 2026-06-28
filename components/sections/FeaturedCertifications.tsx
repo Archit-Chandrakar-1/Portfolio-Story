@@ -19,14 +19,14 @@ export default function FeaturedCertifications({ certs }: { certs: Certification
                         <span className="bg-mint/50 border border-mint text-navy text-xs font-semibold px-4 py-1.5 rounded-full tracking-wider uppercase mb-4 inline-block">
                             Credentials
                         </span>
-                        <h2 className="font-display font-black text-4xl sm:text-5xl text-navy mt-3">
+                        <h2 className="font-display font-black text-4xl sm:text-5xl text-white mt-3">
                             Certifications &{' '}
                             <span className="relative inline-block">
                                 Learning
                                 <span className="absolute -bottom-1 left-0 right-0 h-2.5 bg-lime/40 -z-10 rounded" />
                             </span>
                         </h2>
-                        <p className="text-text-secondary mt-3 max-w-md">
+                        <p className="text-white/70 mt-3 max-w-md">
                             Continuous learning is the PM superpower. Here's my commitment to staying sharp.
                         </p>
                     </div>

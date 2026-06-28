@@ -31,21 +31,21 @@ export default async function LandingAbout() {
                         <span className="bg-lime/30 border border-lime/60 text-navy text-xs font-semibold px-4 py-1.5 rounded-full tracking-wider uppercase mb-5 inline-block">
                             About Me
                         </span>
-                        <h2 className="font-display font-black text-4xl sm:text-5xl text-navy leading-tight mb-4">
+                        <h2 className="font-display font-black text-4xl sm:text-5xl text-white leading-tight mb-4">
                             Hey, I'm{' '}
                             <span className="relative inline-block">
                                 {name.split(' ')[0]}
                                 <span className="absolute -bottom-1 left-0 right-0 h-3 bg-lime/40 -z-10 rounded" />
                             </span>
                         </h2>
-                        <p className="text-text-secondary text-lg leading-relaxed mb-3">{headline}</p>
-                        <div className="flex items-center gap-2 text-text-muted text-sm mb-6">
+                        <p className="text-white/70 text-lg leading-relaxed mb-3">{headline}</p>
+                        <div className="flex items-center gap-2 text-white/50 text-sm mb-6">
                             <RiMapPinLine size={14} className="text-lime-dark" />
                             <span>{location}</span>
                         </div>
 
                         {/* Short bio — first paragraph only */}
-                        <p className="text-text-secondary leading-relaxed mb-8">
+                        <p className="text-white/70 leading-relaxed mb-8">
                             {bio.split('\n\n')[0]}
                         </p>
 

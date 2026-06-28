@@ -57,13 +57,14 @@ export default function Navbar() {
     const [mobileOpen, setMobileOpen] = useState(false);
     const pathname = usePathname();
     const { isAdmin } = useAuth();
+    const isProductsPage = pathname === '/products';
 
     return (
         <motion.header
             initial={{ y: -80, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="fixed top-0 inset-x-0 z-50 py-5 bg-transparent"
+            className={`fixed top-0 inset-x-0 z-50 py-5 ${isProductsPage ? 'bg-black' : 'bg-transparent'}`}
         >
             <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
                 {/* Logo with rocket flying over it */}
