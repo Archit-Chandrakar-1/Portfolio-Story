@@ -16,6 +16,7 @@ service cloud.firestore {
     match /certifications/{doc}  { allow read: if true; allow write: if isAdmin(); }
     match /workflows/{doc}       { allow read: if true; allow write: if isAdmin(); }
     match /services/{doc}        { allow read: if true; allow write: if isAdmin(); }
+    match /settings/{doc}        { allow read: if true; allow write: if isAdmin(); }
 
     // ── Published-gated content ────────────────────────────────────────────
     // Public visitors can read only published docs (the public queries filter
