@@ -31,7 +31,7 @@ export default function AdminSidebar() {
             {/* Brand */}
             <div className="px-4 mb-8">
                 <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-violet to-cyan flex items-center justify-center font-display font-bold text-xs text-white">
+                    <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-violet-500 to-cyan-500 flex items-center justify-center font-display font-bold text-xs text-white">
                         AC
                     </div>
                     <div>
@@ -53,7 +53,7 @@ export default function AdminSidebar() {
                             href={href}
                             onClick={() => setMobileOpen(false)}
                             className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${active
-                                ? 'bg-violet/15 text-violet-light border border-violet/20'
+                                ? 'bg-violet-500/15 text-violet-700 border border-violet-500/25'
                                 : 'text-text-secondary hover:text-text-primary hover:bg-white/5'
                                 }`}
                         >

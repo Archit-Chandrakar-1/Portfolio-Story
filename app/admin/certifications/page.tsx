@@ -81,7 +81,7 @@ export default function AdminCertificationsPage() {
             <AnimatePresence>
                 {adding && (
                     <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-                        className="glass rounded-2xl p-6 border border-violet/20 mb-5">
+                        className="glass rounded-2xl p-6 border border-violet-500/25 mb-5">
                         <h2 className="font-display font-semibold text-text-primary mb-4">New Certification</h2>
                         <Form data={newItem} set={setNewItem} onSave={add} saveLabel="Add" onCancel={() => setAdding(false)} />
                     </motion.div>

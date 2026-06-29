@@ -1,9 +1,10 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { getSiteConfig, setAbout, AboutData } from '@/lib/firestore';
+import { uploadToCloudinary } from '@/lib/cloudinary';
 import toast from 'react-hot-toast';
 import { motion } from 'framer-motion';
-import { RiSaveLine } from 'react-icons/ri';
+import { RiSaveLine, RiUploadLine, RiExternalLinkLine } from 'react-icons/ri';
 
 const DEFAULT: AboutData = {
     name: 'Archit Chandrakar',
@@ -37,6 +38,60 @@ const Field = ({ label, field, data, setData, type = 'text', rows }: { label: st
         )}
     </div>
 );
+
+const ResumeUpload = ({ resumeUrl, onUploaded }: { resumeUrl: string; onUploaded: (url: string) => void }) => {
+    const [uploading, setUploading] = useState(false);
+
+    const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        if (file.size > 10 * 1024 * 1024) {
+            toast.error('File must be under 10MB.');
+            e.target.value = '';
+            return;
+        }
+        setUploading(true);
+        try {
+            const url = await uploadToCloudinary(file);
+            onUploaded(url);
+            toast.success('Resume uploaded!');
+        } catch (err) {
+            toast.error(err instanceof Error ? err.message : 'Upload failed.');
+        } finally {
+            setUploading(false);
+            e.target.value = '';
+        }
+    };
+
+    return (
+        <div>
+            <label className="block text-text-secondary text-sm font-medium mb-1.5">Resume / CV</label>
+            <div className="flex items-center gap-3 flex-wrap">
+                <label className="btn-secondary px-4 py-2.5 text-sm rounded-xl cursor-pointer flex items-center gap-2 w-fit">
+                    <RiUploadLine size={14} />
+                    {uploading ? 'Uploading…' : resumeUrl ? 'Replace File' : 'Upload File'}
+                    <input
+                        type="file"
+                        accept=".pdf,.doc,.docx"
+                        className="hidden"
+                        onChange={handleFile}
+                        disabled={uploading}
+                    />
+                </label>
+                {resumeUrl && (
+                    <a
+                        href={resumeUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-violet-600 text-xs font-medium hover:underline flex items-center gap-1"
+                    >
+                        View current file <RiExternalLinkLine size={11} />
+                    </a>
+                )}
+            </div>
+        </div>
+    );
+};
 
 export default function AdminAboutPage() {
     const [data, setData] = useState<AboutData>(DEFAULT);
@@ -83,7 +138,7 @@ export default function AdminAboutPage() {
                         <Field label="Full Name" field="name" data={data} setData={setData} />
                         <Field label="Location" field="location" data={data} setData={setData} />
                         <Field label="Email" field="email" type="email" data={data} setData={setData} />
-                        <Field label="Resume / CV URL" field="resumeUrl" type="url" data={data} setData={setData} />
+                        <ResumeUpload resumeUrl={data.resumeUrl} onUploaded={(url) => setData({ ...data, resumeUrl: url })} />
                     </div>
                 </div>
 

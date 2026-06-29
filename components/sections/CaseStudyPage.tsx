@@ -93,7 +93,7 @@ function SectionBlock({
                     <span className="bg-navy text-lime text-[10px] font-bold px-3 py-1 rounded-full tracking-widest uppercase">
                         {label}
                     </span>
-                    <h2 className="font-display font-black text-2xl sm:text-3xl text-navy mt-1">
+                    <h2 className="font-display font-black text-2xl sm:text-3xl text-white mt-1">
                         {heading}
                     </h2>
                 </div>
@@ -149,7 +149,7 @@ export default function CaseStudyPage({ product }: Props) {
                     </div>
                 )}
 
-                <div className="relative max-w-4xl mx-auto px-6 pt-10 pb-16">
+                <div className="relative max-w-4xl mx-auto px-6 pt-32 pb-16">
                     {/* Back link */}
                     <Link
                         href="/#products"
@@ -313,7 +313,7 @@ export default function CaseStudyPage({ product }: Props) {
                 {/* ── Footer CTA ────────────────────────────────────────────── */}
                 <div className="border-t border-border pt-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
                     <div>
-                        <p className="font-display font-black text-2xl text-navy">
+                        <p className="font-display font-black text-2xl text-white">
                             Want to work together?
                         </p>
                         <p className="text-text-secondary text-sm mt-1">

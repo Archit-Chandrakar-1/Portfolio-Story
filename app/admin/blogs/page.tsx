@@ -107,7 +107,7 @@ export default function AdminBlogsPage() {
             <AnimatePresence>
                 {adding && (
                     <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-                        className="glass rounded-2xl p-6 border border-violet/20 mb-5">
+                        className="glass rounded-2xl p-6 border border-violet-500/25 mb-5">
                         <h2 className="font-display font-semibold text-text-primary">New Blog Post</h2>
                         <PostForm data={newItem} set={setNewItem} onSave={add} saveLabel="Publish" onCancel={() => setAdding(false)} />
                     </motion.div>
@@ -126,7 +126,7 @@ export default function AdminBlogsPage() {
                                 </div>
                             </div>
                             <div className="flex items-center gap-2 shrink-0">
-                                <span className={`text-xs px-2 py-0.5 rounded-lg border ${item.published ? 'bg-cyan/10 text-cyan-light border-cyan/20' : 'bg-white/5 text-text-muted border-white/10'}`}>
+                                <span className={`text-xs px-2 py-0.5 rounded-lg border ${item.published ? 'bg-cyan-500/10 text-cyan-700 border-cyan-500/20' : 'bg-white/5 text-text-muted border-white/10'}`}>
                                     {item.published ? 'Published' : 'Draft'}
                                 </span>
                                 <button onClick={() => setExpanded(expanded === item.id ? null : item.id!)}

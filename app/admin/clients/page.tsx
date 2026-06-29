@@ -181,7 +181,7 @@ export default function AdminClientsPage() {
                 {adding && (
                     <motion.div
                         initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-                        className="glass rounded-2xl p-6 border border-violet/20 mb-5"
+                        className="glass rounded-2xl p-6 border border-violet-500/25 mb-5"
                     >
                         <h2 className="font-display font-semibold text-text-primary mb-4">New Client</h2>
                         <ItemForm
@@ -211,7 +211,7 @@ export default function AdminClientsPage() {
                                         href={item.website}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="text-xs text-text-muted hover:text-violet-light transition-colors truncate hidden sm:block"
+                                        className="text-xs text-text-muted hover:text-violet-600 transition-colors truncate hidden sm:block"
                                     >
                                         {item.website.replace('https://', '')}
                                     </a>

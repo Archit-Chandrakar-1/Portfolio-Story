@@ -100,7 +100,7 @@ export default function AdminSocialsPage() {
                         <h2 className="font-display font-semibold text-text-primary">Custom Links</h2>
                         <p className="text-text-muted text-xs mt-0.5">Any extra links, e.g. your portfolio, resume, or project page.</p>
                     </div>
-                    <button onClick={addCustom} className="flex items-center gap-1.5 text-violet-light text-xs font-medium hover:text-white transition-colors">
+                    <button onClick={addCustom} className="flex items-center gap-1.5 text-violet-600 text-xs font-medium hover:text-white transition-colors">
                         <RiAddLine size={14} />Add Link
                     </button>
                 </div>

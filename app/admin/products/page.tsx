@@ -45,7 +45,7 @@ const CaseStudySectionField = ({
     onBodyChange: (v: string) => void;
 }) => (
     <div className="rounded-xl border border-white/8 bg-white/[0.02] p-4 space-y-3">
-        <p className="text-xs font-bold uppercase tracking-widest text-violet-light">{label}</p>
+        <p className="text-xs font-bold uppercase tracking-widest text-violet-600">{label}</p>
         <TextField label="Heading" value={heading} onChange={onHeadingChange} />
         <TextField label="Body" value={body} onChange={onBodyChange} rows={3} />
     </div>
@@ -68,10 +68,10 @@ const MetricsEditor = ({
     return (
         <div className="rounded-xl border border-white/8 bg-white/[0.02] p-4 space-y-3">
             <div className="flex items-center justify-between">
-                <p className="text-xs font-bold uppercase tracking-widest text-violet-light">Metrics</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-violet-600">Metrics</p>
                 <button
                     onClick={add}
-                    className="text-xs px-3 py-1 rounded-lg bg-violet/15 text-violet-light border border-violet/20 hover:bg-violet/25 transition-colors flex items-center gap-1"
+                    className="text-xs px-3 py-1 rounded-lg bg-violet-500/15 text-violet-600 border border-violet-500/25 hover:bg-violet-500/25 transition-colors flex items-center gap-1"
                 >
                     <RiAddLine size={11} /> Add Metric
                 </button>
@@ -274,7 +274,7 @@ export default function AdminProductsPage() {
             <AnimatePresence>
                 {adding && (
                     <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-                        className="glass rounded-2xl p-6 border border-violet/20 mb-5">
+                        className="glass rounded-2xl p-6 border border-violet-500/25 mb-5">
                         <h2 className="font-display font-semibold text-text-primary mb-4">New Product</h2>
                         <ItemForm data={newItem} set={setNewItem} onSave={add} onCancel={() => setAdding(false)} saveLabel="Add" />
                     </motion.div>

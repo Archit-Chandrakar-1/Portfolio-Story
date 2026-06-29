@@ -1,6 +1,7 @@
 import { getSiteConfig } from '@/lib/firestore';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import AboutJetVideo from '@/components/sections/AboutJetVideo';
+import ResumeViewerButton from '@/components/ui/ResumeViewerButton';
 import { RiMailSendLine, RiLinkedinFill, RiDownload2Line, RiMapPinLine } from 'react-icons/ri';
 import Image from 'next/image';
 import type { Metadata } from 'next';
@@ -45,10 +46,13 @@ export default async function AboutPage() {
                                     Get in Touch
                                 </a>
                                 {about?.resumeUrl && (
-                                    <a href={about.resumeUrl} target="_blank" rel="noopener noreferrer" className="btn-secondary px-6 py-2.5 text-sm rounded-xl flex items-center gap-2">
-                                        <RiDownload2Line size={15} />
-                                        Download CV
-                                    </a>
+                                    <>
+                                        <a href={about.resumeUrl} target="_blank" rel="noopener noreferrer" className="btn-secondary px-6 py-2.5 text-sm rounded-xl flex items-center gap-2">
+                                            <RiDownload2Line size={15} />
+                                            Download CV
+                                        </a>
+                                        <ResumeViewerButton url={about.resumeUrl} />
+                                    </>
                                 )}
                             </div>
                         </div>

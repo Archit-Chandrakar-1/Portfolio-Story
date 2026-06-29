@@ -1,5 +1,6 @@
 import { getSiteConfig } from '@/lib/firestore';
 import ScrollReveal from '@/components/ui/ScrollReveal';
+import ResumeViewerButton from '@/components/ui/ResumeViewerButton';
 import { RiMapPinLine, RiMailSendLine, RiDownload2Line } from 'react-icons/ri';
 import Image from 'next/image';
 
@@ -58,15 +59,18 @@ export default async function LandingAbout() {
                                 Get in Touch
                             </a>
                             {about?.resumeUrl && (
-                                <a
-                                    href={about.resumeUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="btn-secondary px-6 py-2.5 text-sm rounded-xl flex items-center gap-2"
-                                >
-                                    <RiDownload2Line size={15} />
-                                    Download CV
-                                </a>
+                                <>
+                                    <a
+                                        href={about.resumeUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="btn-secondary px-6 py-2.5 text-sm rounded-xl flex items-center gap-2"
+                                    >
+                                        <RiDownload2Line size={15} />
+                                        Download CV
+                                    </a>
+                                    <ResumeViewerButton url={about.resumeUrl} />
+                                </>
                             )}
                         </div>
                     </ScrollReveal>

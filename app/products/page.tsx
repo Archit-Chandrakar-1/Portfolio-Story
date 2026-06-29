@@ -50,7 +50,7 @@ export default async function ProductsPage() {
                                         {product.imageUrl ? (
                                             <Image src={product.imageUrl} alt={product.name} fill className="object-cover" />
                                         ) : (
-                                            <span className="font-display font-black text-4xl gradient-text opacity-40">{product.name ? product.name[0] : '✧'}</span>
+                                            <span className="font-display font-black text-4xl text-navy opacity-40">{product.name ? product.name[0] : '✧'}</span>
                                         )}
                                         <div className="absolute top-3 left-3 flex items-center gap-1 bg-violet/20 border border-violet/30 text-violet-light text-xs px-2.5 py-1 rounded-lg">
                                             <RiStarLine size={11} />
@@ -69,7 +69,7 @@ export default async function ProductsPage() {
                                             ))}
                                         </div>
 
-                                        <div className="flex items-center gap-2 text-sm font-semibold text-violet-light group-hover:text-white transition-colors mt-auto">
+                                        <div className="flex items-center gap-2 text-sm font-semibold text-navy group-hover:text-lime-dark transition-colors mt-auto">
                                             View Details <RiArrowRightLine size={14} className="group-hover:translate-x-1 transition-transform" />
                                         </div>
                                     </div>
@@ -87,7 +87,7 @@ export default async function ProductsPage() {
                             <Link href={`/products/${product.id}`} className="block h-full cursor-pointer group">
                                 <div className="glass rounded-2xl p-6 border border-white/6 card-hover h-full flex flex-col transition-all duration-300 group-hover:bg-white/5">
                                 <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-violet/20 to-cyan/10 border border-white/8 flex items-center justify-center mb-4">
-                                    <span className="font-display font-black text-lg gradient-text">{product.name ? product.name[0] : '✧'}</span>
+                                    <span className="font-display font-black text-lg text-navy">{product.name ? product.name[0] : '✧'}</span>
                                 </div>
                                 <h3 className="font-display font-bold text-lg text-text-primary mb-1">{product.name}</h3>
                                 <p className="text-text-secondary text-sm mb-3">{product.description}</p>
@@ -97,7 +97,7 @@ export default async function ProductsPage() {
                                         <span key={t} className="text-xs px-2 py-0.5 rounded bg-white/5 text-text-muted border border-white/8">{t}</span>
                                     ))}
                                 </div>
-                                <div className="flex items-center gap-2 text-sm font-semibold text-violet-light group-hover:text-white transition-colors mt-5">
+                                <div className="flex items-center gap-2 text-sm font-semibold text-navy group-hover:text-lime-dark transition-colors mt-5">
                                     View Details <RiArrowRightLine size={14} className="group-hover:translate-x-1 transition-transform" />
                                 </div>
                                 </div>

@@ -76,7 +76,7 @@ export default function AdminExperiencePage() {
             <AnimatePresence>
                 {adding && (
                     <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}
-                        className="glass rounded-2xl p-6 border border-violet/20 mb-5">
+                        className="glass rounded-2xl p-6 border border-violet-500/25 mb-5">
                         <h2 className="font-display font-semibold text-text-primary mb-4">New Experience Entry</h2>
                         <div className="grid sm:grid-cols-2 gap-3 mb-3">
                             {(['title', 'company', 'startDate', 'endDate'] as const).map((f) => (

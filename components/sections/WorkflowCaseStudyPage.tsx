@@ -34,7 +34,7 @@ function Section({
                     <span className="bg-lime text-navy text-[10px] font-bold px-3 py-1 rounded-full tracking-widest uppercase">
                         {label}
                     </span>
-                    <h2 className="font-display font-black text-2xl sm:text-3xl text-navy mt-1">
+                    <h2 className="font-display font-black text-2xl sm:text-3xl text-white mt-1">
                         {heading}
                     </h2>
                 </div>
@@ -60,7 +60,7 @@ export default function WorkflowCaseStudyPage({ workflow }: Props) {
         <main className="min-h-screen bg-bg">
             {/* ── Hero ─────────────────────────────────────────────────────── */}
             <div className="relative bg-navy overflow-hidden">
-                <div className="relative max-w-4xl mx-auto px-6 pt-10 pb-16">
+                <div className="relative max-w-4xl mx-auto px-6 pt-32 pb-16">
                     <Link
                         href="/workflows"
                         className="inline-flex items-center gap-2 text-lime/70 hover:text-lime text-sm font-medium mb-10 transition-colors"
@@ -157,7 +157,7 @@ export default function WorkflowCaseStudyPage({ workflow }: Props) {
                 {/* ── Footer CTA ────────────────────────────────────────────── */}
                 <div className="border-t border-border pt-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
                     <div>
-                        <p className="font-display font-black text-2xl text-navy">
+                        <p className="font-display font-black text-2xl text-white">
                             Want something like this built?
                         </p>
                         <p className="text-text-secondary text-sm mt-1">

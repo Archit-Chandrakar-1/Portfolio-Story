@@ -182,7 +182,7 @@ export default function AdminWorkflowsPage() {
             <AnimatePresence>
                 {adding && (
                     <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-                        className="glass rounded-2xl p-6 border border-violet/20 mb-5">
+                        className="glass rounded-2xl p-6 border border-violet-500/25 mb-5">
                         <h2 className="font-display font-semibold text-text-primary mb-4">New Workflow</h2>
                         <ItemForm data={newItem} set={setNewItem} onSave={add} onCancel={() => setAdding(false)} saveLabel="Add" />
                     </motion.div>

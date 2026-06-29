@@ -38,7 +38,7 @@ export default function AdminDashboard() {
                 <p className="text-text-secondary text-sm">Manage your portfolio content from one place.</p>
 
                 <div className="mt-4">
-                    <a href="/" target="_blank" className="inline-flex items-center gap-2 text-xs text-text-muted hover:text-violet-light transition-colors">
+                    <a href="/" target="_blank" className="inline-flex items-center gap-2 text-xs text-text-muted hover:text-violet-600 transition-colors">
                         <RiExternalLinkLine size={12} />
                         View live portfolio
                     </a>
@@ -69,8 +69,8 @@ export default function AdminDashboard() {
                     <motion.div key={href} variants={item}>
                         <Link href={href}>
                             <div className="glass rounded-2xl p-6 border border-white/6 card-hover h-full flex flex-col gap-4">
-                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${color === 'violet' ? 'bg-violet/15 border border-violet/20' : 'bg-cyan/15 border border-cyan/20'}`}>
-                                    <Icon size={18} className={color === 'violet' ? 'text-violet-light' : 'text-cyan-light'} />
+                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${color === 'violet' ? 'bg-violet-500/15 border border-violet-500/25' : 'bg-cyan-500/15 border border-cyan-500/25'}`}>
+                                    <Icon size={18} className={color === 'violet' ? 'text-violet-500' : 'text-cyan-600'} />
                                 </div>
                                 <div>
                                     <h3 className="font-display font-semibold text-text-primary mb-1">{label}</h3>
