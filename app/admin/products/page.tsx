@@ -1,9 +1,10 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { getProjects, addDocument, updateDocument, deleteDocument, Product, CaseStudy, CaseStudyMetric } from '@/lib/firestore';
+import { uploadToCloudinary } from '@/lib/cloudinary';
 import toast from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
-import { RiAddLine, RiDeleteBinLine, RiSaveLine, RiEyeLine, RiEyeOffLine } from 'react-icons/ri';
+import { RiAddLine, RiDeleteBinLine, RiSaveLine, RiEyeLine, RiEyeOffLine, RiUploadLine, RiExternalLinkLine } from 'react-icons/ri';
 
 const EMPTY_CASE_STUDY: CaseStudy = {
     problem: { heading: '', body: '' },
@@ -31,6 +32,60 @@ const TextField = ({ label, value, onChange, type = 'text', rows }: {
             : <input type={type} value={value} onChange={e => onChange(e.target.value)} className="admin-input px-3 py-2 text-sm w-full" />}
     </div>
 );
+
+const FileUploadField = ({ label, url, onUploaded }: { label: string; url: string; onUploaded: (url: string) => void }) => {
+    const [uploading, setUploading] = useState(false);
+
+    const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        if (file.size > 10 * 1024 * 1024) {
+            toast.error('File must be under 10MB.');
+            e.target.value = '';
+            return;
+        }
+        setUploading(true);
+        try {
+            const uploadedUrl = await uploadToCloudinary(file);
+            onUploaded(uploadedUrl);
+            toast.success('File uploaded!');
+        } catch (err) {
+            toast.error(err instanceof Error ? err.message : 'Upload failed.');
+        } finally {
+            setUploading(false);
+            e.target.value = '';
+        }
+    };
+
+    return (
+        <div>
+            <label className="text-text-secondary text-xs font-medium block mb-1">{label}</label>
+            <div className="flex items-center gap-3 flex-wrap">
+                <label className="btn-secondary px-4 py-2 text-xs rounded-lg cursor-pointer flex items-center gap-2 w-fit">
+                    <RiUploadLine size={13} />
+                    {uploading ? 'Uploading…' : url ? 'Replace File' : 'Upload File'}
+                    <input
+                        type="file"
+                        accept=".pdf,.doc,.docx"
+                        className="hidden"
+                        onChange={handleFile}
+                        disabled={uploading}
+                    />
+                </label>
+                {url && (
+                    <a
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-violet-600 text-xs font-medium hover:underline flex items-center gap-1"
+                    >
+                        View current file <RiExternalLinkLine size={11} />
+                    </a>
+                )}
+            </div>
+        </div>
+    );
+};
 
 // ─── Case Study Section Editor ────────────────────────────────────────────────
 
@@ -148,7 +203,7 @@ const ItemForm = ({
                 <TextField label="Short Description" value={data.description} onChange={v => set({ ...data, description: v })} />
                 <TextField label="Link / URL" value={data.link} onChange={v => set({ ...data, link: v })} type="url" />
                 <TextField label="Image URL" value={data.imageUrl} onChange={v => set({ ...data, imageUrl: v })} type="url" />
-                <TextField label="PRD URL (Optional)" value={data.prdUrl || ''} onChange={v => set({ ...data, prdUrl: v })} type="url" />
+                <FileUploadField label="PRD (Optional)" url={data.prdUrl || ''} onUploaded={(url) => set({ ...data, prdUrl: url })} />
             </div>
             <TextField label="Long Description" value={data.longDescription} onChange={v => set({ ...data, longDescription: v })} rows={3} />
             <TextField label="Tags (comma separated)" value={(data.tags ?? []).join(', ')} onChange={v => set({ ...data, tags: v.split(',').map(t => t.trim()).filter(Boolean) })} />

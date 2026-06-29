@@ -40,6 +40,8 @@ export interface ExperienceEntry {
     title: string;
     company: string;
     companyLogo?: string;
+    companyWebsite?: string;
+    companyLinkedIn?: string;
     startDate: string;
     endDate: string;
     current: boolean;

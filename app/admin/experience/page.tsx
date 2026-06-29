@@ -8,6 +8,7 @@ import { RiAddLine, RiDeleteBinLine, RiSaveLine, RiDraggable, RiEyeLine, RiEyeOf
 const EMPTY: Omit<ExperienceEntry, 'id'> = {
     title: '', company: '', startDate: '', endDate: '', current: false,
     description: '', tags: [], order: 0, companyLogo: '',
+    companyWebsite: '', companyLinkedIn: '',
 };
 
 export default function AdminExperiencePage() {
@@ -92,6 +93,18 @@ export default function AdminExperiencePage() {
                             <textarea value={newItem.description} onChange={(e) => setNewItem({ ...newItem, description: e.target.value })}
                                 rows={3} className="admin-input p-3 text-sm resize-none" />
                         </div>
+                        <div className="grid sm:grid-cols-2 gap-3 mb-4">
+                            <div>
+                                <label className="text-text-secondary text-xs font-medium block mb-1">Company Website (Optional)</label>
+                                <input type="url" value={newItem.companyWebsite || ''} onChange={(e) => setNewItem({ ...newItem, companyWebsite: e.target.value })}
+                                    className="admin-input px-3 py-2 text-sm" placeholder="https://company.com" />
+                            </div>
+                            <div>
+                                <label className="text-text-secondary text-xs font-medium block mb-1">Company LinkedIn (Optional)</label>
+                                <input type="url" value={newItem.companyLinkedIn || ''} onChange={(e) => setNewItem({ ...newItem, companyLinkedIn: e.target.value })}
+                                    className="admin-input px-3 py-2 text-sm" placeholder="https://linkedin.com/company/..." />
+                            </div>
+                        </div>
                         <div className="mb-4">
                             <label className="text-text-secondary text-xs font-medium block mb-1">Tags (comma separated)</label>
                             <input value={newItem.tags.join(', ')} onChange={(e) => setNewItem({ ...newItem, tags: e.target.value.split(',').map(t => t.trim()).filter(Boolean) })}
@@ -155,6 +168,18 @@ export default function AdminExperiencePage() {
                                             <label className="text-text-secondary text-xs font-medium block mb-1">Description</label>
                                             <textarea value={item.description} onChange={(e) => updateField(item.id!, 'description', e.target.value)}
                                                 rows={3} className="admin-input p-3 text-sm resize-none" />
+                                        </div>
+                                        <div className="grid sm:grid-cols-2 gap-3 mb-3">
+                                            <div>
+                                                <label className="text-text-secondary text-xs font-medium block mb-1">Company Website (Optional)</label>
+                                                <input type="url" value={item.companyWebsite || ''} onChange={(e) => updateField(item.id!, 'companyWebsite', e.target.value)}
+                                                    className="admin-input px-3 py-2 text-sm" placeholder="https://company.com" />
+                                            </div>
+                                            <div>
+                                                <label className="text-text-secondary text-xs font-medium block mb-1">Company LinkedIn (Optional)</label>
+                                                <input type="url" value={item.companyLinkedIn || ''} onChange={(e) => updateField(item.id!, 'companyLinkedIn', e.target.value)}
+                                                    className="admin-input px-3 py-2 text-sm" placeholder="https://linkedin.com/company/..." />
+                                            </div>
                                         </div>
                                         <div className="mb-3">
                                             <label className="text-text-secondary text-xs font-medium block mb-1">Tags (comma separated)</label>

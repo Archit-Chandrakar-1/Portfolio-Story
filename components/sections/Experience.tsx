@@ -1,7 +1,7 @@
 'use client';
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { RiBriefcaseLine } from 'react-icons/ri';
+import { RiBriefcaseLine, RiGlobalLine, RiLinkedinBoxFill } from 'react-icons/ri';
 import { ExperienceEntry } from '@/lib/firestore';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
@@ -46,7 +46,7 @@ export default function Experience({ experiences }: ExperienceProps) {
                 </ScrollReveal>
 
                 {/* Timeline */}
-                <div ref={containerRef} className="relative max-w-3xl mx-auto">
+                <div ref={containerRef} className="relative max-w-5xl mx-auto">
                     {/* Animated vertical line */}
                     <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-border -translate-x-1/2">
                         <motion.div
@@ -82,6 +82,28 @@ export default function Experience({ experiences }: ExperienceProps) {
                                                         <div className="flex items-center gap-1.5 text-text-secondary text-sm mt-1">
                                                             <RiBriefcaseLine size={13} />
                                                             <span>{exp.company}</span>
+                                                            {exp.companyWebsite && (
+                                                                <a
+                                                                    href={exp.companyWebsite}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    aria-label={`${exp.company} website`}
+                                                                    className="text-text-muted hover:text-lime-dark transition-colors"
+                                                                >
+                                                                    <RiGlobalLine size={14} />
+                                                                </a>
+                                                            )}
+                                                            {exp.companyLinkedIn && (
+                                                                <a
+                                                                    href={exp.companyLinkedIn}
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    aria-label={`${exp.company} on LinkedIn`}
+                                                                    className="text-text-muted hover:text-lime-dark transition-colors"
+                                                                >
+                                                                    <RiLinkedinBoxFill size={15} />
+                                                                </a>
+                                                            )}
                                                         </div>
                                                     </div>
                                                     <div className="text-right shrink-0">
