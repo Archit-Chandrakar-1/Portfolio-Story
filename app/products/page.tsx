@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     description: 'Products and projects built by Archit Chandrakar.',
 };
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 export default async function ProductsPage() {
     const data = await getProjects().catch(() => []);

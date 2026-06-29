@@ -61,6 +61,7 @@ export default function LotusBackground() {
                 muted
                 playsInline
                 preload="auto"
+                poster="/images/posters/lotus-hero-bg-poster.jpg"
                 className="absolute inset-0 w-full h-full object-cover"
                 src="/videos/lotus-hero-bg.mp4"
             />

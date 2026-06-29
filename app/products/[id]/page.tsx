@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { RiArrowLeftLine, RiExternalLinkLine, RiFileList3Line } from 'react-icons/ri';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
     const product = await getDocument<Product>(`projects/${params.id}`);

@@ -6,7 +6,7 @@ import FeaturedProducts from '@/components/sections/FeaturedProducts';
 import FeaturedCertifications from '@/components/sections/FeaturedCertifications';
 import { getSiteConfig, getExperiences, getProjects, getCertifications } from '@/lib/firestore';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 export default async function HomePage() {
     const [about, experiences, products, certs] = await Promise.allSettled([

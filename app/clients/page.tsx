@@ -1,7 +1,7 @@
 import { getClients } from '@/lib/firestore';
 import ClientsSection from '@/components/sections/ClientsSection';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 export const metadata = {
     title: 'Clients — Archit Chandrakar',

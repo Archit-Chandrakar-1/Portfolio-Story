@@ -2,7 +2,7 @@ import WorkflowsHero from '@/components/sections/WorkflowsHero';
 import WorkflowsSection from '@/components/sections/WorkflowsSection';
 import { getWorkflows } from '@/lib/firestore';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 export const metadata = {
     title: 'Workflows | Portfolio',

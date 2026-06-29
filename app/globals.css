@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -26,7 +24,7 @@ html {
 body {
   background-color: var(--bg);
   color: #F2F2F5;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter), sans-serif;
   overflow-x: hidden;
 }
 
@@ -208,7 +206,7 @@ body {
   border: none;
   border-radius: 12px;
   font-weight: 600;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter), sans-serif;
   cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
@@ -262,7 +260,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 10px;
   color: #111827;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter), sans-serif;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
@@ -283,7 +281,7 @@ body {
   border: none;
   border-radius: 12px;
   font-weight: 600;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter), sans-serif;
   cursor: pointer;
   transition: all 0.2s ease;
   display: inline-flex;
@@ -314,7 +312,7 @@ body {
   border: 1px solid rgba(239, 68, 68, 0.3);
   border-radius: 12px;
   font-weight: 600;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter), sans-serif;
   cursor: pointer;
   transition: all 0.2s ease;
   display: inline-flex;

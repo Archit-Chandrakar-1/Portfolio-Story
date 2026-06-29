@@ -1,102 +1,85 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 const SPOTLIGHT_R = 220;
 const BASE_IMAGE = '/images/footer-reveal-base.webp';
 const REVEAL_IMAGE = '/images/footer-reveal-glow.webp';
+const SETTLE_EPSILON = 0.05;
 
-function RevealLayer({
-    image,
-    cursorX,
-    cursorY,
-    size,
-}: {
-    image: string;
-    cursorX: number;
-    cursorY: number;
-    size: { w: number; h: number };
-}) {
-    const canvasRef = useRef<HTMLCanvasElement>(null);
-    const [maskUrl, setMaskUrl] = useState<string | null>(null);
-
-    useEffect(() => {
-        const canvas = canvasRef.current;
-        if (!canvas || size.w === 0 || size.h === 0) return;
-        canvas.width = size.w;
-        canvas.height = size.h;
-        const ctx = canvas.getContext('2d');
-        if (!ctx) return;
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        const gradient = ctx.createRadialGradient(cursorX, cursorY, 0, cursorX, cursorY, SPOTLIGHT_R);
-        gradient.addColorStop(0, 'rgba(255,255,255,1)');
-        gradient.addColorStop(0.4, 'rgba(255,255,255,1)');
-        gradient.addColorStop(0.6, 'rgba(255,255,255,0.75)');
-        gradient.addColorStop(0.75, 'rgba(255,255,255,0.4)');
-        gradient.addColorStop(0.88, 'rgba(255,255,255,0.12)');
-        gradient.addColorStop(1, 'rgba(255,255,255,0)');
-
-        ctx.fillStyle = gradient;
-        ctx.beginPath();
-        ctx.arc(cursorX, cursorY, SPOTLIGHT_R, 0, Math.PI * 2);
-        ctx.fill();
-
-        setMaskUrl(canvas.toDataURL());
-    }, [cursorX, cursorY, size]);
-
-    return (
-        <>
-            <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" style={{ display: 'none' }} />
-            <div
-                className="absolute inset-0 bg-center bg-cover bg-no-repeat pointer-events-none"
-                style={{
-                    backgroundImage: `url(${image})`,
-                    WebkitMaskImage: maskUrl ? `url(${maskUrl})` : undefined,
-                    maskImage: maskUrl ? `url(${maskUrl})` : undefined,
-                    WebkitMaskSize: '100% 100%',
-                    maskSize: '100% 100%',
-                }}
-            />
-        </>
-    );
+// Same gradient stops as the old canvas version, just expressed as a CSS
+// radial-gradient mask instead of a rasterized canvas->toDataURL() PNG.
+function buildMask(x: number, y: number) {
+    return `radial-gradient(circle ${SPOTLIGHT_R}px at ${x}px ${y}px, ` +
+        `rgba(255,255,255,1) 0%, rgba(255,255,255,1) 40%, ` +
+        `rgba(255,255,255,0.75) 60%, rgba(255,255,255,0.4) 75%, ` +
+        `rgba(255,255,255,0.12) 88%, rgba(255,255,255,0) 100%)`;
 }
 
 export default function FooterRevealBackground() {
     const containerRef = useRef<HTMLDivElement>(null);
+    const revealRef = useRef<HTMLDivElement>(null);
     const mouse = useRef({ x: -999, y: -999 });
     const smooth = useRef({ x: -999, y: -999 });
-    const rafRef = useRef<number>(0);
-    const [cursorPos, setCursorPos] = useState({ x: -999, y: -999 });
-    const [size, setSize] = useState({ w: 0, h: 0 });
+    const rafRef = useRef<number | null>(null);
+    const inViewRef = useRef(false);
 
     useEffect(() => {
-        const updateSize = () => {
-            const el = containerRef.current;
-            if (el) setSize({ w: el.offsetWidth, h: el.offsetHeight });
+        const container = containerRef.current;
+        const revealEl = revealRef.current;
+        if (!container || !revealEl) return;
+
+        const applyMask = (x: number, y: number) => {
+            const mask = buildMask(x, y);
+            revealEl.style.maskImage = mask;
+            revealEl.style.WebkitMaskImage = mask;
         };
-        updateSize();
-        window.addEventListener('resize', updateSize);
+
+        // Start fully masked-out, matching the original's initial {x:-999,y:-999}.
+        applyMask(smooth.current.x, smooth.current.y);
+
+        const stepLoop = () => {
+            const dx = mouse.current.x - smooth.current.x;
+            const dy = mouse.current.y - smooth.current.y;
+            smooth.current.x += dx * 0.1;
+            smooth.current.y += dy * 0.1;
+            applyMask(smooth.current.x, smooth.current.y);
+
+            // Once settled, stop the RAF loop entirely instead of running forever;
+            // the next mousemove (while in view) restarts it.
+            if (Math.abs(dx) > SETTLE_EPSILON || Math.abs(dy) > SETTLE_EPSILON) {
+                rafRef.current = requestAnimationFrame(stepLoop);
+            } else {
+                rafRef.current = null;
+            }
+        };
+
+        const ensureLoopRunning = () => {
+            if (rafRef.current === null && inViewRef.current) {
+                rafRef.current = requestAnimationFrame(stepLoop);
+            }
+        };
 
         const handleMove = (e: MouseEvent) => {
-            const el = containerRef.current;
-            if (!el) return;
-            const rect = el.getBoundingClientRect();
+            const rect = container.getBoundingClientRect();
             mouse.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+            ensureLoopRunning();
         };
         window.addEventListener('mousemove', handleMove);
 
-        const loop = () => {
-            smooth.current.x += (mouse.current.x - smooth.current.x) * 0.1;
-            smooth.current.y += (mouse.current.y - smooth.current.y) * 0.1;
-            setCursorPos({ x: smooth.current.x, y: smooth.current.y });
-            rafRef.current = requestAnimationFrame(loop);
-        };
-        rafRef.current = requestAnimationFrame(loop);
+        // Only animate while the footer is actually in the viewport.
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                inViewRef.current = entry.isIntersecting;
+                if (entry.isIntersecting) ensureLoopRunning();
+            },
+            { threshold: 0 }
+        );
+        observer.observe(container);
 
         return () => {
-            window.removeEventListener('resize', updateSize);
             window.removeEventListener('mousemove', handleMove);
-            cancelAnimationFrame(rafRef.current);
+            observer.disconnect();
+            if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
         };
     }, []);
 
@@ -106,7 +89,11 @@ export default function FooterRevealBackground() {
                 className="absolute inset-0 bg-center bg-cover bg-no-repeat"
                 style={{ backgroundImage: `url(${BASE_IMAGE})` }}
             />
-            <RevealLayer image={REVEAL_IMAGE} cursorX={cursorPos.x} cursorY={cursorPos.y} size={size} />
+            <div
+                ref={revealRef}
+                className="absolute inset-0 bg-center bg-cover bg-no-repeat pointer-events-none"
+                style={{ backgroundImage: `url(${REVEAL_IMAGE})` }}
+            />
             <div className="absolute inset-0 bg-navy/75" />
         </div>
     );

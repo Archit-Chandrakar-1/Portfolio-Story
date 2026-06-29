@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     description: 'Learn more about Archit Chandrakar, Product Manager.',
 };
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 export default async function AboutPage() {
     const about = await getSiteConfig().catch(() => null);

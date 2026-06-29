@@ -44,6 +44,22 @@ function Connector({ icon }: { icon: ReactNode }) {
     );
 }
 
+function VerticalConnector({ icon }: { icon: ReactNode }) {
+    return (
+        <div className="relative flex items-center justify-center w-8 h-10 shrink-0">
+            <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-px bg-lime/40" />
+            <motion.div
+                className="absolute left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-lime shadow-lime"
+                animate={{ top: ['0%', '100%'] }}
+                transition={{ duration: 1.2, repeat: Infinity, ease: 'linear' }}
+            />
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full border-2 border-lime/50 bg-bg flex items-center justify-center text-lime">
+                {icon}
+            </div>
+        </div>
+    );
+}
+
 export default function WorkflowsHero() {
     return (
         <section className="relative pt-32 pb-16 px-6 bg-bg overflow-hidden">
@@ -67,9 +83,21 @@ export default function WorkflowsHero() {
                     </p>
                 </ScrollReveal>
 
-                {/* Diagram */}
+                {/* Diagram — vertical stack on small screens, horizontal from sm: up */}
                 <ScrollReveal delay={0.15}>
-                    <div className="flex items-center justify-center flex-wrap gap-0">
+                    <div className="flex sm:hidden flex-col items-center">
+                        <DiagramBox label="Input" sub="Trigger" />
+                        <VerticalConnector icon={<RiGlobalLine size={16} />} />
+                        <DiagramBox
+                            label="AI Agent"
+                            sub="Think · Decide"
+                            big
+                            icon={<RiSparkling2Fill size={22} className="text-lime" />}
+                        />
+                        <VerticalConnector icon={<RiRefreshLine size={16} />} />
+                        <DiagramBox label="Output" sub="Action" />
+                    </div>
+                    <div className="hidden sm:flex items-center justify-center flex-wrap gap-0">
                         <DiagramBox label="Input" sub="Trigger" />
                         <Connector icon={<RiGlobalLine size={16} />} />
                         <DiagramBox

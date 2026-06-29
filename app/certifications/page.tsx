@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     description: 'Professional certifications and credentials of Archit Chandrakar.',
 };
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 export default async function CertificationsPage() {
     const data = await getCertifications().catch(() => []);

@@ -5,7 +5,7 @@ import { RiArrowLeftLine, RiExternalLinkLine } from 'react-icons/ri';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import WorkflowTimeline from '@/components/sections/WorkflowTimeline';
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
     const workflow = await getDocument<Workflow>(`workflows/${params.id}`);

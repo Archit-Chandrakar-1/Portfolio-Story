@@ -21,7 +21,7 @@ function readingTime(content: string) {
     return Math.ceil(content.split(' ').length / 200);
 }
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 const DEMO_POSTS: BlogPost[] = [
     {

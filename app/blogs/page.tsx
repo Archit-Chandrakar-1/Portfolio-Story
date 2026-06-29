@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     description: 'Product management insights and essays by Archit Chandrakar.',
 };
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 function readingTime(content: string) {
     const words = content.split(' ').length;

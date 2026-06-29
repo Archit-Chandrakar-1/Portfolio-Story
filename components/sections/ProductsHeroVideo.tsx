@@ -64,6 +64,7 @@ export default function ProductsHeroVideo() {
                 muted
                 playsInline
                 preload="auto"
+                poster="/images/posters/products-hero-scrub-poster.jpg"
                 className="w-full h-full object-cover object-right lg:object-right-bottom"
                 src="/videos/products-hero-scrub.mp4"
             />
