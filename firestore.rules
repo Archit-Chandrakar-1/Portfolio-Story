@@ -30,6 +30,13 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
+    // ── Private: agent grounding data ──────────────────────────────────────
+    // Deliberately NOT publicly readable, unlike the portfolio collections
+    // above. Nothing here renders on the public site — it is the private fact
+    // pool the job-application agent draws on, so reads are owner-only. n8n
+    // must authenticate with a service account (the Admin SDK bypasses rules).
+    match /agentFacts/{doc}      { allow read, write: if isAdmin(); }
+
     // ── Everything else: deny ──────────────────────────────────────────────
     match /{document=**} {
       allow read, write: if false;

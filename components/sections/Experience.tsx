@@ -114,7 +114,7 @@ export default function Experience({ experiences }: ExperienceProps) {
                                                     </div>
                                                 </div>
 
-                                                <p className="text-text-secondary text-sm leading-relaxed mb-4">{exp.description}</p>
+                                                <p className="text-text-secondary text-sm leading-relaxed mb-4 whitespace-pre-line">{exp.description}</p>
 
                                                 {/* Tags */}
                                                 <div className="flex flex-wrap gap-2">

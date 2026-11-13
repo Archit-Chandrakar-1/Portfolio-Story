@@ -1,6 +1,7 @@
 import { getProjects } from '@/lib/firestore';
 import ScrollReveal from '@/components/ui/ScrollReveal';
 import ProductsHeroVideo from '@/components/sections/ProductsHeroVideo';
+import ProductCardPreview from '@/components/sections/ProductCardPreview';
 import { RiExternalLinkLine, RiStarLine, RiArrowRightLine } from 'react-icons/ri';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -81,24 +82,30 @@ export default async function ProductsPage() {
                 )}
 
                 {/* Rest */}
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div className="grid sm:grid-cols-2 gap-6">
                     {rest.map((product, i) => (
                         <ScrollReveal key={product.id} delay={i * 0.08} direction="up">
                             <Link href={`/products/${product.id}`} className="block h-full cursor-pointer group">
-                                <div className="glass rounded-2xl p-6 border border-white/6 card-hover h-full flex flex-col transition-all duration-300 group-hover:bg-white/5">
-                                <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-violet/20 to-cyan/10 border border-white/8 flex items-center justify-center mb-4">
-                                    <span className="font-display font-black text-lg text-navy">{product.name ? product.name[0] : '✧'}</span>
-                                </div>
-                                <h3 className="font-display font-bold text-lg text-text-primary mb-1">{product.name}</h3>
-                                <p className="text-text-secondary text-sm mb-3">{product.description}</p>
-                                <p className="text-text-muted text-sm leading-relaxed flex-1">{product.longDescription}</p>
-                                <div className="mt-4 flex flex-wrap gap-2">
-                                    {product.tags?.map((t) => (
-                                        <span key={t} className="text-xs px-2 py-0.5 rounded bg-white/5 text-text-muted border border-white/8">{t}</span>
-                                    ))}
-                                </div>
-                                <div className="flex items-center gap-2 text-sm font-semibold text-navy group-hover:text-lime-dark transition-colors mt-5">
-                                    View Details <RiArrowRightLine size={14} className="group-hover:translate-x-1 transition-transform" />
+                                <div className="glass rounded-3xl overflow-hidden border border-white/6 card-hover h-full flex flex-col transition-all duration-300 group-hover:bg-white/5">
+                                {product.link ? (
+                                    <ProductCardPreview url={product.link} name={product.name} />
+                                ) : (
+                                    <div className="h-80 relative bg-gradient-to-br from-violet/20 via-bg to-cyan/10 flex items-center justify-center">
+                                        <span className="font-display font-black text-4xl text-navy opacity-40">{product.name ? product.name[0] : '✧'}</span>
+                                    </div>
+                                )}
+                                <div className="p-4 flex flex-col flex-1">
+                                    <h3 className="font-display font-bold text-sm text-text-primary mb-0.5">{product.name}</h3>
+                                    <p className="text-text-secondary text-xs mb-1.5">{product.description}</p>
+                                    <p className="text-text-muted text-xs leading-snug flex-1">{product.longDescription}</p>
+                                    <div className="mt-2 flex flex-wrap gap-1.5">
+                                        {product.tags?.map((t) => (
+                                            <span key={t} className="text-[10px] px-1.5 py-0.5 rounded bg-white/5 text-text-muted border border-white/8">{t}</span>
+                                        ))}
+                                    </div>
+                                    <div className="flex items-center gap-2 text-xs font-semibold text-navy group-hover:text-lime-dark transition-colors mt-3">
+                                        View Details <RiArrowRightLine size={12} className="group-hover:translate-x-1 transition-transform" />
+                                    </div>
                                 </div>
                                 </div>
                             </Link>

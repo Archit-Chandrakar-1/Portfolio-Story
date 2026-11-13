@@ -179,6 +179,79 @@ export const getClients = () =>
         orderBy('order', 'asc')
     );
 
+// ─── Agent Fact Pool ──────────────────────────────────────────────────────────
+// The grounded source of truth the job-application agent is allowed to draw on.
+// One doc = one atomic, checkable claim. The LLM selects and cites `factId`s
+// rather than writing experience of its own, so nothing unverified reaches a
+// resume or cold email.
+
+export type FactCategory =
+    | 'experience'
+    | 'project'
+    | 'skill'
+    | 'education'
+    | 'certification'
+    | 'personal';
+
+/** Which target-role narrative a fact supports. */
+export type RoleTrack = 'technical-pm' | 'ai-pm' | 'both';
+
+/**
+ * How widely a fact may travel.
+ *  - `public`         already on the portfolio / LinkedIn; safe anywhere.
+ *  - `private`        NDA-ish, but fine in a resume or email to one employer.
+ *  - `interview-only` never put in writing. Held for personal recall and
+ *                     stripped from every export, so the agent cannot mail it.
+ */
+export type FactVisibility = 'public' | 'private' | 'interview-only';
+
+export interface AgentFact {
+    id?: string;
+    /** Stable, human-readable citation key, e.g. "EXP-ATPM-03". */
+    factId: string;
+    category: FactCategory;
+    /** The atomic claim, written as a resume-ready bullet. */
+    statement: string;
+    /** Where it happened — company, product, or project name. */
+    context: string;
+    /** Quantified outcome, if one exists. Kept separate so it can be verified. */
+    metric: string;
+    /** Skill tags used to match the fact against a JD. */
+    skills: string[];
+    tracks: RoleTrack[];
+    /** 1–5 selection priority when the agent has to cut for length. */
+    weight: number;
+    /** Inactive facts are withheld from the agent entirely. */
+    active: boolean;
+    /** Confidentiality tier. Governs whether the fact reaches the agent at all. */
+    visibility: FactVisibility;
+    /**
+     * Raw detail — real client names, exact figures — kept for your own
+     * interview prep. Never exported and never sent to the agent under any
+     * visibility tier. Keep `statement` itself sanitised.
+     */
+    privateNote?: string;
+    /**
+     * Provenance when seeded from existing portfolio content, e.g.
+     * "experience:abc123#0". Used to avoid re-importing the same bullet twice.
+     * Absent on hand-written facts.
+     */
+    source?: string;
+    createdAt: string;
+    updatedAt: string;
+}
+
+export const getAgentFacts = () =>
+    getCollectionDocs<AgentFact>('agentFacts', orderBy('factId', 'asc'));
+
+/** Only what the agent is cleared to use, shaped for the n8n prompt. */
+export const getActiveAgentFacts = () =>
+    getCollectionDocs<AgentFact>(
+        'agentFacts',
+        where('active', '==', true),
+        orderBy('factId', 'asc')
+    );
+
 
 // ─── Generic Helpers ──────────────────────────────────────────────────────────
 
@@ -234,7 +307,7 @@ export const getSiteConfig = () =>
 export const setAbout = (data: AboutData) => setDocument('siteConfig/main', data);
 
 export const getExperiences = () =>
-    getCollectionDocs<ExperienceEntry>('experience', orderBy('order', 'asc'));
+    getCollectionDocs<ExperienceEntry>('experience', orderBy('order', 'desc'));
 
 export const getProjects = () =>
     getCollectionDocs<Product>('projects', orderBy('order', 'asc'));

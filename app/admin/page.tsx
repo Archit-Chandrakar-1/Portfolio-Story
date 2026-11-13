@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { RiUserLine, RiBriefcaseLine, RiApps2Line, RiAwardLine, RiArticleLine, RiLinksLine, RiExternalLinkLine, RiFlowChart } from 'react-icons/ri';
+import { RiUserLine, RiBriefcaseLine, RiApps2Line, RiAwardLine, RiArticleLine, RiLinksLine, RiExternalLinkLine, RiFlowChart, RiBrainLine } from 'react-icons/ri';
 import { useAuth } from '@/lib/AuthContext';
 
 const SECTIONS = [
@@ -13,6 +13,7 @@ const SECTIONS = [
     { href: '/admin/blogs', icon: RiArticleLine, label: 'Blog Posts', desc: 'Write and publish product insights', color: 'violet' },
     { href: '/admin/workflows', icon: RiFlowChart, label: 'Workflows', desc: 'Manage automated workflows and pipelines', color: 'violet' },
     { href: '/admin/socials', icon: RiLinksLine, label: 'Socials & Links', desc: 'Update social media accounts and links', color: 'cyan' },
+    { href: '/admin/agent', icon: RiBrainLine, label: 'Agent Brain', desc: 'Teach your job-application agent what it may say about you', color: 'violet' },
 ];
 
 export default function AdminDashboard() {

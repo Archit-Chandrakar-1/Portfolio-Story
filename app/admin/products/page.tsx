@@ -87,6 +87,49 @@ const FileUploadField = ({ label, url, onUploaded }: { label: string; url: strin
     );
 };
 
+const ImageUrlField = ({ label, url, onChange }: { label: string; url: string; onChange: (v: string) => void }) => {
+    const [uploading, setUploading] = useState(false);
+
+    const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        if (file.size > 10 * 1024 * 1024) {
+            toast.error('Image must be under 10MB.');
+            e.target.value = '';
+            return;
+        }
+        setUploading(true);
+        try {
+            const uploadedUrl = await uploadToCloudinary(file, 'image');
+            onChange(uploadedUrl);
+            toast.success('Image uploaded!');
+        } catch (err) {
+            toast.error(err instanceof Error ? err.message : 'Upload failed.');
+        } finally {
+            setUploading(false);
+            e.target.value = '';
+        }
+    };
+
+    return (
+        <div>
+            <label className="text-text-secondary text-xs font-medium block mb-1">{label}</label>
+            <div className="flex items-center gap-2">
+                <input type="url" value={url} onChange={e => onChange(e.target.value)} className="admin-input px-3 py-2 text-sm w-full" placeholder="https://..." />
+                <label className="btn-secondary px-3 py-2 text-xs rounded-lg cursor-pointer flex items-center gap-1.5 shrink-0 whitespace-nowrap">
+                    <RiUploadLine size={13} />
+                    {uploading ? 'Uploading…' : 'Upload'}
+                    <input type="file" accept="image/*" className="hidden" onChange={handleFile} disabled={uploading} />
+                </label>
+            </div>
+            {url && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={url} alt="" className="mt-2 h-16 rounded-lg border border-white/10 object-cover" />
+            )}
+        </div>
+    );
+};
+
 // ─── Case Study Section Editor ────────────────────────────────────────────────
 
 const CaseStudySectionField = ({
@@ -202,7 +245,7 @@ const ItemForm = ({
                 <TextField label="Product Name" value={data.name} onChange={v => set({ ...data, name: v })} />
                 <TextField label="Short Description" value={data.description} onChange={v => set({ ...data, description: v })} />
                 <TextField label="Link / URL" value={data.link} onChange={v => set({ ...data, link: v })} type="url" />
-                <TextField label="Image URL" value={data.imageUrl} onChange={v => set({ ...data, imageUrl: v })} type="url" />
+                <ImageUrlField label="Image URL" url={data.imageUrl} onChange={v => set({ ...data, imageUrl: v })} />
                 <FileUploadField label="PRD (Optional)" url={data.prdUrl || ''} onUploaded={(url) => set({ ...data, prdUrl: url })} />
             </div>
             <TextField label="Long Description" value={data.longDescription} onChange={v => set({ ...data, longDescription: v })} rows={3} />

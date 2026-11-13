@@ -31,7 +31,7 @@ export default function FooterRevealBackground() {
         const applyMask = (x: number, y: number) => {
             const mask = buildMask(x, y);
             revealEl.style.maskImage = mask;
-            revealEl.style.WebkitMaskImage = mask;
+            revealEl.style.webkitMaskImage = mask;
         };
 
         // Start fully masked-out, matching the original's initial {x:-999,y:-999}.

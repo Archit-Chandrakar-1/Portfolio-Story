@@ -6,7 +6,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import {
     RiDashboardLine, RiUserLine, RiBriefcaseLine, RiApps2Line,
-    RiAwardLine, RiArticleLine, RiLinksLine, RiLogoutBoxLine, RiMenuLine, RiCloseLine, RiFlowChart
+    RiAwardLine, RiArticleLine, RiLinksLine, RiLogoutBoxLine, RiMenuLine, RiCloseLine, RiFlowChart,
+    RiBrainLine
 } from 'react-icons/ri';
 
 const NAV = [
@@ -19,6 +20,7 @@ const NAV = [
     { href: '/admin/workflows', label: 'Workflows', icon: RiFlowChart },
     { href: '/admin/socials', label: 'Socials & Links', icon: RiLinksLine },
     { href: '/admin/clients', label: 'Clients', icon: RiBriefcaseLine },
+    { href: '/admin/agent', label: 'Agent Brain', icon: RiBrainLine },
 ]
 
 export default function AdminSidebar() {
